@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>socket.io chat</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+  <ui id="messages"></ui>
+  <form id="message_form" method="GET" action="/login">
+    <input type="submit" value="ログインする">
+  </form>
+  <form id="message_form" method="POST" action="/post_announcement">
+    <input type="number" name="input_date">
+    <input type="date" name="input_date" /><input type="submit" value="送信する">
+  </form>
+  <a href="discord_send">ディスコードにメッセージを送る</a>
+  <script>
+    var socketio = io();
+    $(function () {
+      $('#message_form').submit(function () {
+        socketio.emit('message', $('#input_msg').val());
+        $('#input_msg').val('');
+        return false;
+      });
+      socketio.on('message', function (msg) {
+        $('#messages').append($('<li>').text(msg));
+      });
+    });
+  </script>
+</body>
+
+</html>
