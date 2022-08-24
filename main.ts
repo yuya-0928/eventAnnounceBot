@@ -60,20 +60,7 @@ app.get("/login", async (req: any, res: any) => {
   res.redirect(authUrl);
 });
 
-app.get("/tweets", async (req: any, res: any) => {
-  const tweets = await auth_client.tweets.findTweetById("20");
-  res.send(tweets.data);
-});
-
-app.get("/revoke", async (req: any, res: any) => {
-  try {
-    const response = await authClient.revokeAccessToken();
-    res.send(response);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
+// Twitterに告知を投稿&Discordにお知らせをURL付きで投稿&イベントカレンダーに遷移する
 app.post("/post_announcement", async (req: any, res: any) => {
   const numberOfSessions = req.body.input_date[0];
   const date = req.body.input_date[1];
@@ -91,11 +78,42 @@ app.post("/post_announcement", async (req: any, res: any) => {
   });
   console.log(postTweet);
   discord_client.channels.cache
-    .get("949289883728510977")
+    .get("920327603397750804")
+    .send(
+      `@everyone\n次の金曜日も開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${postTweet.data.id}`
+    );
+
+  discord_client.channels.cache
+    .get("960070787837067294")
     .send(
       `@everyone\n次の金曜日も開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${postTweet.data.id}`
     );
   res.redirect(`${setEventCalenderDate(date).join("")}`);
+});
+
+app.post("/post_announcement_only_discord", async (req: any, res: any) => {
+  const numberOfSessions = req.body.event_session;
+  console.log(numberOfSessions);
+
+  const getTweets = await auth_client.tweets.tweetsRecentSearch({
+    query: `from:VRCENGAssoc 【第${numberOfSessions}回 `,
+  });
+  console.log(getTweets);
+
+  const tweet_id = getTweets.data[0]["id"];
+  discord_client.channels.cache
+    .get("920327603397750804")
+    .send(
+      `@everyone\n今夜開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${tweet_id}`
+    );
+
+  discord_client.channels.cache
+    .get("960070787837067294")
+    .send(
+      `@everyone\n今夜開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${tweet_id}`
+    );
+
+  res.redirect("/");
 });
 
 app.listen(3000, () => {

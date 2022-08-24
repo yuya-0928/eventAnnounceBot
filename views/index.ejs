@@ -8,28 +8,23 @@
 </head>
 
 <body>
-  <ui id="messages"></ui>
-  <form id="message_form" method="GET" action="/login">
+  <h1>エンジニア作業飲み集会通知システム</h1>
+  <form method="GET" action="/login">
     <input type="submit" value="ログインする">
   </form>
+  <h2>Tweet&Discord通知&イベントカレンダー登録</h2>
+  <p>`@everyone\n次の金曜日も開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${postTweet.data.id}`</p>
   <form id="message_form" method="POST" action="/post_announcement">
     <input type="number" name="input_date">
-    <input type="date" name="input_date" /><input type="submit" value="送信する">
+    <input type="date" name="input_date" />
+    <input type="submit" value="送信する" />
   </form>
-  <a href="discord_send">ディスコードにメッセージを送る</a>
-  <script>
-    var socketio = io();
-    $(function () {
-      $('#message_form').submit(function () {
-        socketio.emit('message', $('#input_msg').val());
-        $('#input_msg').val('');
-        return false;
-      });
-      socketio.on('message', function (msg) {
-        $('#messages').append($('<li>').text(msg));
-      });
-    });
-  </script>
+  <h2>当日Discord通知</h2>
+  <p>`@everyone\n今夜開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${tweet_id}`</p>
+  <form id="message_form" method="POST" action="/post_announcement_only_discord">
+    <input type="number" name="event_session">
+    <input type="submit" value="送信する">
+  </form>
 </body>
 
 </html>
