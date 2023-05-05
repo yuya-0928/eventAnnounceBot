@@ -1,12 +1,18 @@
 import * as dotenv from "dotenv";
+import Client from "twitter-api-sdk";
+import { OAuth2User } from "twitter-api-sdk/dist/OAuth2User";
 dotenv.config();
 const env = process.env;
 
-const Client = require("twitter-api-sdk").Client;
-const auth = require("twitter-api-sdk").auth;
+const checkNotUndefined = (token: string | undefined) => {
+  if (token === undefined) {
+    throw Error("環境変数がundefinedです");
+  }
+  return token;
+};
 
-export const authClient = new auth.OAuth2User({
-  client_id: env.TWITTER_CLIENT_ID,
+export const authClient = new OAuth2User({
+  client_id: checkNotUndefined(env.TWITTER_CLIENT_ID),
   client_secret: env.TWITTER_CLIENT_SECRET,
   callback: "http://localhost:3000/callback",
   scopes: ["tweet.read", "tweet.write", "users.read", "offline.access"],
