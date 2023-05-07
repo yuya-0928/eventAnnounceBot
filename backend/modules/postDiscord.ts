@@ -27,7 +27,7 @@ export const postDiscord = (
     const channel = discord_client.channels.cache.get(channelId) as TextChannel;
     const existChannel = checkChannelExist(channel);
     existChannel.send(
-      `@everyone\n次の金曜日も開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${postTweetData.data.id}`
+      `@everyone\n次の金曜日も開催するよーーー！\n良かったら遊びにきてねーー！！`
     );
   }
 };
@@ -39,12 +39,14 @@ export const postDiscordToday = (
 ) => {
   if (tweet_id) {
     const channel = discord_client.channels.cache.get(channelId) as TextChannel;
+    if (channel === undefined) throw Error("channelが見つかりませんでした。");
     const existChannel = checkChannelExist(channel);
     existChannel.send(
       `@everyone\n今夜開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${tweet_id}`
     );
   } else {
     const channel = discord_client.channels.cache.get(channelId) as TextChannel;
+    if (channel === undefined) throw Error("channelが見つかりませんでした。");
     const existChannel = checkChannelExist(channel);
     existChannel.send(
       `@everyone\n今夜開催するよーーー！\n良かったら遊びにきてねーー！！`

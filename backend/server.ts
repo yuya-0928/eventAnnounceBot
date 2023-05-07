@@ -47,7 +47,7 @@ app.post("/post_announcement", async (req: any, res: any) => {
   const formDataArray = formData(req);
   let postTweetData;
 
-  if (false) {
+  if (!formDataArray.isTestMode) {
     // TwitterAPIの処理
     const res_initUpload = await initUpload();
     const res_appendUpload = await appendUpload(res_initUpload);
@@ -61,7 +61,7 @@ app.post("/post_announcement", async (req: any, res: any) => {
     console.log(postTweet);
   }
 
-  if (false) {
+  if (!formDataArray.isTestMode) {
     // discordBotへの投稿処理
     postDiscord(discord_client, "920327603397750804", postTweetData);
     postDiscord(discord_client, "920327603397750804", postTweetData);
@@ -74,6 +74,7 @@ app.post("/post_announcement", async (req: any, res: any) => {
 });
 
 app.post("/post_announcement_only_discord", async (req: any, res: any) => {
+  const formDataArray = formData(req);
   const numberOfSessions = req.body.event_session;
   console.log(numberOfSessions);
 
@@ -84,9 +85,14 @@ app.post("/post_announcement_only_discord", async (req: any, res: any) => {
   if (getTweets.data === undefined) throw Error("Tweetが見つかりません");
 
   const tweet_id = getTweets.data[0]["id"];
-  postDiscordToday(discord_client, "920327603397750804", tweet_id);
 
-  postDiscordToday(discord_client, "920327603397750804", tweet_id);
+  if (!formDataArray.isTestMode) {
+    postDiscordToday(discord_client, "920327603397750804", tweet_id);
+
+    postDiscordToday(discord_client, "920327603397750804", tweet_id);
+  } else {
+    postDiscordToday(discord_client, "949289883728510977", tweet_id);
+  }
 
   res.redirect("/");
 });
