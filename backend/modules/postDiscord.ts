@@ -1,7 +1,5 @@
 import {
-  AnyChannel,
   Client as discrodClient,
-  Intents,
   TextChannel,
 } from "discord.js";
 

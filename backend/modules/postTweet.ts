@@ -1,4 +1,12 @@
-const postTweet = () => {
+import { Client } from "twitter-api-sdk";
+import { appendUpload, finalizeUpload, initUpload } from "./twitterApi/mediaUpload";
+
+export const postTweet = async (auth_client: Client, formDataArray: {
+  date: any;
+  numberOfSessions: any;
+  dateAry: any;
+  isTestMode: boolean;
+}) => {
   // TwitterAPIの処理
   const res_initUpload = await initUpload();
   const res_appendUpload = await appendUpload(res_initUpload);
