@@ -13,16 +13,25 @@
     <input type="submit" value="ログインする">
   </form>
   <h2>Tweet&Discord通知&イベントカレンダー登録</h2>
-  <p>`@everyone\n次の金曜日も開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${postTweet.data.id}`</p>
   <form id="message_form" method="POST" action="/post_announcement">
-    <input type="number" name="input_date">
-    <input type="date" name="input_date" />
+    <input type="number" name="numberOfSessions">
+    <input type="date" name="date" />
+    <input type="checkbox" name="isTestModeToggle" id="test-mode" />
+    <label for="test-mode">テストモード</label>
+    <textarea name="textData">次の金曜日も開催するよーーー！
+良かったら遊びにきてねーー！！
+    </textarea>
     <input type="submit" value="送信する" />
   </form>
   <h2>当日Discord通知</h2>
-  <p>`@everyone\n今夜開催するよーーー！\n良かったら遊びにきてねーー！！\nhttps://twitter.com/VRCENGAssoc/status/${tweet_id}`</p>
   <form id="message_form" method="POST" action="/post_announcement_only_discord">
-    <input type="number" name="event_session">
+    <input type="number" name="numberOfSessions">
+    <input type="checkbox" name="isTestModeToggle" id="test-mode" />
+    <label for="test-mode">テストモード</label>
+    <textarea name="textData">
+今夜開催するよーーー！
+良かったら遊びにきてねーー！！
+    </textarea>
     <input type="submit" value="送信する">
   </form>
 </body>
