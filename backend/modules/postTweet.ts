@@ -18,4 +18,5 @@ export const postTweet = async (auth_client: Client, formDataArray: {
     },
   });
   console.log(postTweet);
+  return postTweet;
 };

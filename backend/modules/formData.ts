@@ -1,7 +1,9 @@
 export const formData = (req: any) => {
-  const numberOfSessions = req.body.input_date[0];
-  const date = req.body.input_date[1];
-  const isTestModeToggle = req.body.input_date[2];
+  console.log(req.body);
+  const numberOfSessions = req.body.numberOfSessions ?? '';
+  const date = req.body.date ?? '';
+  const isTestModeToggle = req.body.isTestModeToggle ?? '';
+  const textData = req.body.textData ?? '';
   // console.log({
   //   numberOfSessions: numberOfSessions,
   //   date: date,
@@ -22,5 +24,6 @@ export const formData = (req: any) => {
     numberOfSessions: numberOfSessions,
     dateAry: dateAry,
     isTestMode: isTestMode,
+    textData: textData,
   };
 };

@@ -4,7 +4,7 @@ import { authClient, auth_client } from "./modules/twitterApi/authClient";
 import { discord_client } from "./modules/discordClient/discordBot";
 import { setEventCalenderDate } from "../eventCalenderParameter";
 import { formData } from "./modules/formData";
-import { postDiscord, postDiscordToday } from "./modules/postDiscord";
+import { postDiscord } from "./modules/postDiscord";
 import { postTweet } from "./modules/postTweet";
 import { getTweets } from "./modules/twitterApi/getTweet";
 
@@ -43,27 +43,30 @@ app.post("/post_announcement", async (req: any, res: any) => {
   const formDataArray = formData(req);
   let postTweetData;
   if (!formDataArray.isTestMode) {
-    postTweet(auth_client, formDataArray);
+    postTweetData = postTweet(auth_client, formDataArray);
   }
   if (!formDataArray.isTestMode) {
-    postDiscord(discord_client, "920327603397750804", postTweetData);
-    postDiscord(discord_client, "920327603397750804", postTweetData);
+    postDiscord(discord_client, "920327603397750804", formDataArray.textData, postTweetData);
     res.redirect(`${setEventCalenderDate(formDataArray.date).join("")}`);
   } else {
-    postDiscord(discord_client, "949289883728510977", postTweetData);
+    postDiscord(discord_client, "949289883728510977", formDataArray.textData, postTweetData);
     res.redirect(`${setEventCalenderDate(formDataArray.date).join("")}`);
   }
 });
 
 app.post("/post_announcement_only_discord", async (req: any, res: any) => {
   const formDataArray = formData(req);
-  const numberOfSessions = req.body.event_session;
-  const tweet_id = await getTweets(auth_client, numberOfSessions);
+  console.log(formDataArray)
+  let tweet_id;
+  
   if (!formDataArray.isTestMode) {
-    postDiscordToday(discord_client, "920327603397750804", tweet_id);
-    postDiscordToday(discord_client, "920327603397750804", tweet_id);
+    tweet_id = await getTweets(auth_client, formDataArray.numberOfSessions);
+  }
+
+  if (!formDataArray.isTestMode) {
+    postDiscord(discord_client, "920327603397750804", formDataArray.textData, tweet_id);
   } else {
-    postDiscordToday(discord_client, "949289883728510977", tweet_id);
+    postDiscord(discord_client, "949289883728510977", formDataArray.textData);
   }
   res.redirect("/");
 });
