@@ -43,7 +43,7 @@ app.post("/post_announcement", async (req: any, res: any) => {
   const formDataArray = formData(req);
   let postTweetData;
   if (!formDataArray.isTestMode) {
-    postTweetData = postTweet(auth_client, formDataArray);
+    postTweetData = await postTweet(auth_client, formDataArray);
   }
   if (!formDataArray.isTestMode) {
     postDiscord(discord_client, "920327603397750804", formDataArray.textData, postTweetData);
