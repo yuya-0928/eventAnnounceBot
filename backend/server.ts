@@ -6,7 +6,6 @@ import { setEventCalenderDate } from "../eventCalenderParameter";
 import { formData } from "./modules/formData";
 import { postDiscord } from "./modules/postDiscord";
 import { postTweet } from "./modules/postTweet";
-import { getTweets } from "./modules/twitterApi/getTweet";
 
 const app: express.Express = express();
 const STATE = "my-state";
@@ -46,25 +45,36 @@ app.post("/post_announcement", async (req: any, res: any) => {
     postTweetData = await postTweet(auth_client, formDataArray);
   }
   if (!formDataArray.isTestMode) {
-    postDiscord(discord_client, "920327603397750804", formDataArray.textData, postTweetData);
+    postDiscord(
+      discord_client,
+      "920327603397750804",
+      formDataArray.textData,
+      postTweetData
+    );
     res.redirect(`${setEventCalenderDate(formDataArray.date).join("")}`);
   } else {
-    postDiscord(discord_client, "949289883728510977", formDataArray.textData, postTweetData);
+    postDiscord(
+      discord_client,
+      "949289883728510977",
+      formDataArray.textData,
+      postTweetData
+    );
     res.redirect(`${setEventCalenderDate(formDataArray.date).join("")}`);
   }
 });
 
 app.post("/post_announcement_only_discord", async (req: any, res: any) => {
   const formDataArray = formData(req);
-  console.log(formDataArray)
+  console.log(formDataArray);
   let tweet_id;
-  
-  if (!formDataArray.isTestMode) {
-    tweet_id = await getTweets(auth_client, formDataArray.numberOfSessions);
-  }
 
   if (!formDataArray.isTestMode) {
-    postDiscord(discord_client, "920327603397750804", formDataArray.textData, tweet_id);
+    postDiscord(
+      discord_client,
+      "920327603397750804",
+      formDataArray.textData,
+      tweet_id
+    );
   } else {
     postDiscord(discord_client, "949289883728510977", formDataArray.textData);
   }
