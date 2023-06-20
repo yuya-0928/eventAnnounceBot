@@ -2,6 +2,9 @@ import * as dotenv from "dotenv";
 dotenv.config();
 const env = process.env;
 
+// TODO: Twitter API SDK for TypeScriptライブラリを使った書き方を調べる。https://github.com/twitterdev/twitter-api-typescript-sdk
+// twitterライブラリがimportに対応していない
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Twitter = require("twitter");
 
 export const twitter_client = new Twitter({

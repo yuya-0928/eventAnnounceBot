@@ -10,7 +10,7 @@ export const discord_client: discrodClient<boolean> = new discrodClient({
 });
 
 discord_client.once("ready", () => {
-  console.log("起動完了"); 
+  console.log("起動完了");
 });
 
 discord_client.login(env.DISCORD_BOT_TOKEN);

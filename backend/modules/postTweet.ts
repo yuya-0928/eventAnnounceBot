@@ -1,12 +1,32 @@
 import { Client } from "twitter-api-sdk";
-import { appendUpload, finalizeUpload, initUpload } from "./twitterApi/mediaUpload";
+import {
+  appendUpload,
+  finalizeUpload,
+  initUpload,
+} from "./twitterApi/mediaUpload";
+import { TypeFormData } from "./formData";
 
-export const postTweet = async (auth_client: Client, formDataArray: {
-  date: any;
-  numberOfSessions: any;
-  dateAry: any;
-  isTestMode: boolean;
-}) => {
+export type TypePostTweet = {
+  data?:
+    | {
+        id: string;
+        text: string;
+      }
+    | undefined;
+  errors?:
+    | {
+        detail?: string | undefined;
+        status?: number | undefined;
+        title: string;
+        type: string;
+      }[]
+    | undefined;
+};
+
+export const postTweet = async (
+  auth_client: Client,
+  formDataArray: TypeFormData
+) => {
   // TwitterAPIの処理
   const res_initUpload = await initUpload();
   const res_appendUpload = await appendUpload(res_initUpload);
