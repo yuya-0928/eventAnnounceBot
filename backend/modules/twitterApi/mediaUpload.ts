@@ -1,9 +1,10 @@
 import { twitter_client } from "./twitterClient";
+import fs from "fs";
 
 const pathToImage = "./image/1_.png";
 const mediaType = "image/png";
-const mediaData = require("fs").readFileSync(pathToImage);
-const mediaSize = require("fs").statSync(pathToImage).size;
+const mediaData = fs.readFileSync(pathToImage);
+const mediaSize = fs.statSync(pathToImage).size;
 
 export const initUpload = () => {
   return makePost("media/upload", {
