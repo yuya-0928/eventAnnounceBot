@@ -1,6 +1,6 @@
 import express from "express";
 
-type TypeFormData = {
+export type TypeFormData = {
   date: string;
   numberOfSessions: string;
   dateAry: string[];
