@@ -1,0 +1,13 @@
+{
+  "name": "eventAnnounceBot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:yuya-0928/eventAnnounceBot.git",
+  "author": "yuni-0928 <yuniyuni0928@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn start:backend & yarn start:frontend",
+    "start:backend": "cd backend && yarn start",
+    "start:frontend": "cd frontend && yarn dev"
+  }
+}
