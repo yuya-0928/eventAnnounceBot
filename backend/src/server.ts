@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { authClient, auth_client } from "./modules/twitterApi/authClient";
 import { discord_client } from "./modules/discordClient/discordBot";
-import { setEventCalenderDate } from "../eventCalenderParameter";
+import { setEventCalenderDate } from "./eventCalenderParameter";
 import { formData } from "./modules/formData";
 import { postDiscord } from "./modules/postDiscord";
 import { TypePostTweet, postTweet } from "./modules/postTweet";
