@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>エンジニア作業飲み集会通知システム</h1>
+      <form method="GET" action="/login">
+        <input type="submit" value="ログインする" />
+      </form>
+      <h2>Tweet&Discord通知&イベントカレンダー登録</h2>
+      <form id="message_form" method="POST" action="/post_announcement">
+        <input type="number" name="numberOfSessions" />
+        <input type="date" name="date" />
+        <input type="checkbox" name="isTestModeToggle" id="test-mode" />
+        <label htmlFor="test-mode">テストモード</label>
+        <textarea name="textData">
+          次の金曜日も開催するよーーー！ 良かったら遊びにきてねーー！！
+        </textarea>
+        <input type="submit" value="送信する" />
+      </form>
+      <h2>当日Discord通知</h2>
+      <form
+        id="message_form"
+        method="POST"
+        action="/post_announcement_only_discord"
+      >
+        <input type="number" name="numberOfSessions" />
+        <input type="checkbox" name="isTestModeToggle" id="test-mode" />
+        <label htmlFor="test-mode">テストモード</label>
+        <textarea name="textData">
+          今夜開催するよーーー！ 良かったら遊びにきてねーー！！
+        </textarea>
+        <input type="submit" value="送信する" />
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
