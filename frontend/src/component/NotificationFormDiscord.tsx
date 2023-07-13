@@ -1,3 +1,4 @@
+import { TextField as MuiTextField } from "@material-ui/core";
 export const NotificationFormDiscord = () => {
   return (
     <>
@@ -7,12 +8,11 @@ export const NotificationFormDiscord = () => {
         method="POST"
         action="http://localhost:3001/post_announcement_only_discord"
       >
-        <input type="number" name="numberOfSessions" />
-        <input type="checkbox" name="isTestModeToggle" id="test-mode" />
-        <label htmlFor="test-mode">テストモード</label>
-        <textarea name="textData">
-          今夜開催するよーーー！ 良かったら遊びにきてねーー！！
-        </textarea>
+        <MuiTextField
+          type="number"
+          name="numberOfSessions"
+          variant="outlined"
+        />
         <input type="submit" value="送信する" />
       </form>
     </>
