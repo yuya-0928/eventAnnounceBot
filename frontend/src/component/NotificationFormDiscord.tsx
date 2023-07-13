@@ -20,6 +20,12 @@ export const NotificationFormDiscord = () => {
           control={<Checkbox name="isTestModeToggle" id="test-mode" />}
           label="テストモード"
         />
+        <MuiTextField
+          name="textData"
+          variant="outlined"
+          defaultValue="今夜開催するよーーー！ 良かったら遊びにきてねーー！！"
+          multiline
+        />
         <input type="submit" value="送信する" />
       </form>
     </>
