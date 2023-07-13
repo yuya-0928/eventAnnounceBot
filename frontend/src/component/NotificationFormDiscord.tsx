@@ -1,4 +1,7 @@
 import { TextField as MuiTextField } from "@material-ui/core";
+import { Checkbox } from "@mui/material";
+import { FormControlLabel } from "@mui/material";
+
 export const NotificationFormDiscord = () => {
   return (
     <>
@@ -12,6 +15,10 @@ export const NotificationFormDiscord = () => {
           type="number"
           name="numberOfSessions"
           variant="outlined"
+        />
+        <FormControlLabel
+          control={<Checkbox name="isTestModeToggle" id="test-mode" />}
+          label="テストモード"
         />
         <input type="submit" value="送信する" />
       </form>
