@@ -25,6 +25,12 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
           control={<Checkbox name="isTestModeToggle" id="test-mode" />}
           label="テストモード"
         />
+        <MuiTextField
+          name="textData"
+          variant="outlined"
+          defaultValue="次の金曜日も開催するよーーー！ 良かったら遊びにきてねーー！！"
+          multiline
+        />
         <input type="submit" value="送信する" />
       </form>
     </>
