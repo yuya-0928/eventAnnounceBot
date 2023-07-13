@@ -1,3 +1,6 @@
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 export const NotificationFormTweetAndDiscordAndCharender = () => {
   return (
     <>
@@ -7,8 +10,9 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
         method="POST"
         action="http://localhost:3001/post_announcement"
       >
-        <input type="number" name="numberOfSessions" />
-        <input type="date" name="date" />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker />
+        </LocalizationProvider>
         <input type="checkbox" name="isTestModeToggle" id="test-mode" />
         <label htmlFor="test-mode">テストモード</label>
         <textarea name="textData">
