@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import { authClient, auth_client } from "./modules/twitterApi/authClient";
 import { discord_client } from "./modules/discordClient/discordBot";
@@ -9,6 +10,12 @@ import { TypePostTweet, postTweet } from "./modules/postTweet";
 
 const app: express.Express = express();
 const STATE = "my-state";
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
