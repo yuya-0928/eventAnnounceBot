@@ -40,10 +40,6 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(formik.values);
-  }, [formik.values]);
-
   return (
     <>
       <h2>Tweet&Discord通知&イベントカレンダー登録</h2>
