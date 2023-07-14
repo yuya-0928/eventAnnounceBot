@@ -6,6 +6,8 @@ import {
   FormControlLabel as MuiFormControlLabel,
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export const VrcEventCalenderUrlGenerator = () => {
   return (
@@ -30,7 +32,13 @@ export const VrcEventCalenderUrlGenerator = () => {
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>日付</MuiFormLabel>
-          <MuiTextField name="date" variant="outlined" />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              onChange={(newValue) => {
+                console.log(newValue);
+              }}
+            />
+          </LocalizationProvider>
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>開始時刻</MuiFormLabel>
