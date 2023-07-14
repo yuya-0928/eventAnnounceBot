@@ -21,9 +21,7 @@ export const VrcEventCalenderUrlGenerator = () => {
     eventOwner: "慕狼ゆに",
     evnetContent:
       "技術触ってる人が集まって、作業したりお酒飲みながら作業したり、とりあえずワイワイしたりする集会です！ハードウェア、ソフトウェアなどの技術分野は不問！どのような形でも、技術と関わりのある方でしたら参加OKです！参加する際は、ジュース、お酒など飲み物を用意してきてください！",
-    eventGenre1: "その他交流会",
-    eventGenre2: "VR飲み会",
-    eventGenre3: "定期イベント",
+    eventGenre: ["定期イベント", "VR飲み会", "その他交流会"],
     participationConditions:
       "UnityでもBlenderでも、マイコンでもC言語でも、HTMLでもPHPでも、技術と関わりがある人であればOKです！参加する際は、ジュース、お酒など飲み物を用意してきてください！",
     wayToParticipate: "「慕狼ゆに」にJoinして下さい！",
