@@ -116,7 +116,7 @@ export const VrcEventCalenderUrlGenerator = () => {
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>海外ユーザー向け告知</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiFormControlLabel control={<MuiCheckbox />} label={"希望する"} />
         </MuiFormControl>
       </MuiFormGroup>
     </>
