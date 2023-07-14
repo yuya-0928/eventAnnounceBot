@@ -16,7 +16,7 @@ export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
     eventName: "エンジニア作業飲み集会",
     isQuestAvelable: "PC/Quest両対応（Quest対応）",
-    date: ``,
+    date: dayjs(),
     startTime: "22:00",
     endTime: "23:30",
     eventOwner: "慕狼ゆに",
@@ -45,6 +45,7 @@ export const VrcEventCalenderUrlGenerator = () => {
           <MuiTextField
             name="eventName"
             variant="outlined"
+            value={formik.values.eventName}
             onChange={formik.handleChange}
           />
         </MuiFormControl>
@@ -59,7 +60,6 @@ export const VrcEventCalenderUrlGenerator = () => {
             control={<MuiCheckbox />}
             label={"Quest オンリー"}
           />
-          <MuiTextField name="isQuestAvelable" variant="outlined" />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>日付</MuiFormLabel>
@@ -72,6 +72,7 @@ export const VrcEventCalenderUrlGenerator = () => {
                   true
                 );
               }}
+              value={dayjs(formik.values.date, "YYYY-MM-DD")}
             />
           </LocalizationProvider>
         </MuiFormControl>
@@ -79,13 +80,14 @@ export const VrcEventCalenderUrlGenerator = () => {
           <MuiFormLabel>開始時刻</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <TimeField
+              format="HH:mm"
               onChange={(time: Dayjs | null) => {
                 void formik.setFieldValue(
                   "startTime",
-                  dayjs(time).format("HH:mm"),
-                  true
+                  dayjs(time).format("HH:mm")
                 );
               }}
+              value={dayjs(formik.values.startTime, "HH:mm")}
             />
           </LocalizationProvider>
         </MuiFormControl>
@@ -93,6 +95,7 @@ export const VrcEventCalenderUrlGenerator = () => {
           <MuiFormLabel>終了時刻</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <TimeField
+              format="HH:mm"
               onChange={(time: Dayjs | null) => {
                 void formik.setFieldValue(
                   "endTime",
@@ -100,6 +103,7 @@ export const VrcEventCalenderUrlGenerator = () => {
                   true
                 );
               }}
+              value={dayjs(formik.values.endTime, "HH:mm")}
             />
           </LocalizationProvider>
         </MuiFormControl>
@@ -109,6 +113,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             name="eventName"
             variant="outlined"
             onChange={formik.handleChange}
+            value={formik.values.eventOwner}
           />
         </MuiFormControl>
         <MuiFormControl>
@@ -117,6 +122,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             name="eventName"
             variant="outlined"
             onChange={formik.handleChange}
+            value={formik.values.evnetContent}
           />
         </MuiFormControl>
         <MuiFormControl>
@@ -165,6 +171,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             name="eventName"
             variant="outlined"
             onChange={formik.handleChange}
+            value={formik.values.participationConditions}
           />
         </MuiFormControl>
         <MuiFormControl>
@@ -173,6 +180,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             name="eventName"
             variant="outlined"
             onChange={formik.handleChange}
+            value={formik.values.wayToParticipate}
           />
         </MuiFormControl>
         <MuiFormControl>
@@ -181,6 +189,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             name="eventName"
             variant="outlined"
             onChange={formik.handleChange}
+            value={formik.values.note}
           />
         </MuiFormControl>
         <MuiFormControl>
