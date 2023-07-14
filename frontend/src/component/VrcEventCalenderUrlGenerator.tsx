@@ -9,13 +9,14 @@ import {
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimeField } from "@mui/x-date-pickers/TimeField";
-import dayjs from "dayjs";
+import { useFormik } from "formik";
+import dayjs, { Dayjs } from "dayjs";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
     eventName: "エンジニア作業飲み集会",
     isQuestAvelable: "PC/Quest両対応（Quest対応）",
-    date: `${dayjs().format("YYYY-MM-DD")}`,
+    date: ``,
     startTime: "22:00",
     endTime: "23:30",
     eventOwner: "慕狼ゆに",
@@ -28,12 +29,24 @@ export const VrcEventCalenderUrlGenerator = () => {
     note: "告知ツイートのURLやタイムスケジュールなどあればご記載ください%0Ahttps://twitter.com/VRCENGAssoc/status/${postTweet.data.id}%0A%0A参加する際は、ジュース、お酒など飲み物を用意してきてください！%0A22:00+~+23:00+イベント時間%0A23:00+~+23:10+記念撮影%0A23:10+~+23:40++軽い自己紹介タイム%0Aその後は自由に雑談したりお酒飲んだり",
   };
 
+  const formik = useFormik({
+    initialValues,
+    onSubmit: () => {
+      console.log("submit");
+    },
+  });
+
   return (
-    <>
+    <form onSubmit={formik.handleSubmit}>
+      <h2>VRChatイベントカレンダーURL生成</h2>
       <MuiFormGroup>
         <MuiFormControl>
           <MuiFormLabel>イベント名</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiTextField
+            name="eventName"
+            variant="outlined"
+            onChange={formik.handleChange}
+          />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>Quest対応可否</MuiFormLabel>
@@ -52,8 +65,12 @@ export const VrcEventCalenderUrlGenerator = () => {
           <MuiFormLabel>日付</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              onChange={(newValue) => {
-                console.log(newValue);
+              onChange={(newValue: Dayjs | null) => {
+                void formik.setFieldValue(
+                  "date",
+                  dayjs(newValue).format("YYYY-MM-DD"),
+                  true
+                );
               }}
             />
           </LocalizationProvider>
@@ -61,22 +78,46 @@ export const VrcEventCalenderUrlGenerator = () => {
         <MuiFormControl>
           <MuiFormLabel>開始時刻</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <TimeField />
+            <TimeField
+              onChange={(time: Dayjs | null) => {
+                void formik.setFieldValue(
+                  "startTime",
+                  dayjs(time).format("HH:mm"),
+                  true
+                );
+              }}
+            />
           </LocalizationProvider>
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>終了時刻</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <TimeField />
+            <TimeField
+              onChange={(time: Dayjs | null) => {
+                void formik.setFieldValue(
+                  "endTime",
+                  dayjs(time).format("HH:mm"),
+                  true
+                );
+              }}
+            />
           </LocalizationProvider>
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>イベント主催者</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiTextField
+            name="eventName"
+            variant="outlined"
+            onChange={formik.handleChange}
+          />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>イベント内容</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiTextField
+            name="eventName"
+            variant="outlined"
+            onChange={formik.handleChange}
+          />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>イベントジャンル</MuiFormLabel>
@@ -117,25 +158,36 @@ export const VrcEventCalenderUrlGenerator = () => {
             control={<MuiCheckbox />}
             label={"定期イベント"}
           />
-          <MuiTextField name="isQuestAvelable" variant="outlined" />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>参加条件（モデル、人数制限など）</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiTextField
+            name="eventName"
+            variant="outlined"
+            onChange={formik.handleChange}
+          />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>参加方法</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiTextField
+            name="eventName"
+            variant="outlined"
+            onChange={formik.handleChange}
+          />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>備考</MuiFormLabel>
-          <MuiTextField name="eventName" variant="outlined" />
+          <MuiTextField
+            name="eventName"
+            variant="outlined"
+            onChange={formik.handleChange}
+          />
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>海外ユーザー向け告知</MuiFormLabel>
           <MuiFormControlLabel control={<MuiCheckbox />} label={"希望する"} />
         </MuiFormControl>
       </MuiFormGroup>
-    </>
+    </form>
   );
 };
