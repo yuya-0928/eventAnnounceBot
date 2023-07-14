@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { TimeField } from "@mui/x-date-pickers/TimeField";
 
 export const VrcEventCalenderUrlGenerator = () => {
   return (
@@ -42,11 +43,15 @@ export const VrcEventCalenderUrlGenerator = () => {
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>開始時刻</MuiFormLabel>
-          <MuiTextField name="startTime" variant="outlined" />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <TimeField />
+          </LocalizationProvider>
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>終了時刻</MuiFormLabel>
-          <MuiTextField name="endTime" variant="outlined" />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <TimeField />
+          </LocalizationProvider>
         </MuiFormControl>
         <MuiFormControl>
           <MuiFormLabel>イベント主催者</MuiFormLabel>
