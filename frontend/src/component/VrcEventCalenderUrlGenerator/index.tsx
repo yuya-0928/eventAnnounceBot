@@ -14,6 +14,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useEffect } from "react";
 import { EventName } from "./Form/EventName";
 import { AvelablePlatform } from "./Form/AvelablePlatform";
+import { Date } from "./Form/Date";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -55,21 +56,17 @@ export const VrcEventCalenderUrlGenerator = () => {
           avelablePlatform={formik.values.avelablePlatform}
           onChange={() => formik.handleChange}
         />
-        <MuiFormControl>
-          <MuiFormLabel>日付</MuiFormLabel>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              onChange={(newValue: Dayjs | null) => {
-                void formik.setFieldValue(
-                  "date",
-                  dayjs(newValue).format("YYYY-MM-DD"),
-                  true
-                );
-              }}
-              value={dayjs(formik.values.date, "YYYY-MM-DD")}
-            />
-          </LocalizationProvider>
-        </MuiFormControl>
+        <Date
+          date={formik.values.date}
+          onChange={(newValue) => {
+            void formik.setFieldValue(
+              "date",
+              dayjs(newValue).format("YYYY-MM-DD"),
+              true
+            );
+          }}
+        />
+
         <MuiFormControl>
           <MuiFormLabel>開始時刻</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
