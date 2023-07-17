@@ -18,6 +18,7 @@ import { Date } from "./Form/Date";
 import { StartTime } from "./Form/StartTime";
 import { EndTime } from "./Form/EndTIme";
 import { EventOwner } from "./Form/EventOwner";
+import { EventContent } from "./Form/EventContent";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -85,15 +86,10 @@ export const VrcEventCalenderUrlGenerator = () => {
           eventOwner={formik.values.eventOwner}
           onChange={() => formik.handleChange}
         />
-        <MuiFormControl>
-          <MuiFormLabel>イベント内容</MuiFormLabel>
-          <MuiTextField
-            name="eventName"
-            variant="outlined"
-            onChange={formik.handleChange}
-            value={formik.values.evnetContent}
-          />
-        </MuiFormControl>
+        <EventContent
+          eventContent={formik.values.evnetContent}
+          onChange={() => formik.handleChange}
+        />
         <MuiFormControl>
           <MuiFormLabel>イベントジャンル</MuiFormLabel>
           <MuiFormControlLabel
