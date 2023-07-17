@@ -21,6 +21,7 @@ import { EventOwner } from "./Form/EventOwner";
 import { EventContent } from "./Form/EventContent";
 import { EventGenre } from "./Form/EventGenre";
 import { ParticipationConditions } from "./Form/ParticipationConditions";
+import { WayToParticipate } from "./Form/WayToParticipate";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -99,15 +100,10 @@ export const VrcEventCalenderUrlGenerator = () => {
             formik.handleChange;
           }}
         />
-        <MuiFormControl>
-          <MuiFormLabel>参加方法</MuiFormLabel>
-          <MuiTextField
-            name="eventName"
-            variant="outlined"
-            onChange={formik.handleChange}
-            value={formik.values.wayToParticipate}
-          />
-        </MuiFormControl>
+        <WayToParticipate
+          wayToParticipate={formik.values.wayToParticipate}
+          onChange={() => formik.handleChange}
+        />
         <MuiFormControl>
           <MuiFormLabel>備考</MuiFormLabel>
           <MuiTextField
