@@ -12,7 +12,7 @@ import { EventContent } from "./Form/EventContent";
 import { EventGenre } from "./Form/EventGenre";
 import { ParticipationConditions } from "./Form/ParticipationConditions";
 import { WayToParticipate } from "./Form/WayToParticipate";
-import { Note } from "@mui/icons-material";
+import { Note } from "./Form/Note";
 import { NoticeForOverseasUsers } from "./Form/NoticeForOverseasUsers";
 
 export const VrcEventCalenderUrlGenerator = () => {
@@ -96,7 +96,7 @@ export const VrcEventCalenderUrlGenerator = () => {
           wayToParticipate={formik.values.wayToParticipate}
           onChange={() => formik.handleChange}
         />
-        <Note />
+        <Note note={formik.values.note} onChange={() => formik.handleChange} />
         <NoticeForOverseasUsers />
       </MuiFormGroup>
     </form>
