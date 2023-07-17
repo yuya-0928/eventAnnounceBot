@@ -90,55 +90,7 @@ export const VrcEventCalenderUrlGenerator = () => {
           eventContent={formik.values.evnetContent}
           onChange={() => formik.handleChange}
         />
-        <MuiFormControl>
-          <MuiFormLabel>イベントジャンル</MuiFormLabel>
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"アバター試着会"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"改変アバター交流会"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"その他交流会"}
-          />
-          <MuiFormControlLabel control={<MuiCheckbox />} label={"VR飲み会"} />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"店舗系イベント"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"音楽系イベント"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"学術系イベント"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"ロールプレイ"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"初心者向けイベント"}
-          />
-          <MuiFormControlLabel
-            control={<MuiCheckbox />}
-            label={"定期イベント"}
-          />
-        </MuiFormControl>
-        <MuiFormControl>
-          <MuiFormLabel>参加条件（モデル、人数制限など）</MuiFormLabel>
-          <MuiTextField
-            name="eventName"
-            variant="outlined"
-            onChange={formik.handleChange}
-            value={formik.values.participationConditions}
-          />
-        </MuiFormControl>
+        <EventGenre />
         <MuiFormControl>
           <MuiFormLabel>参加方法</MuiFormLabel>
           <MuiTextField
