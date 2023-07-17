@@ -4,16 +4,24 @@ import {
   FormControl as MuiFormControl,
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
+import { useState } from "react";
 
 type Props = {
   avelablePlatform: {
     pc: boolean;
     quest: boolean;
   };
-  onChange: () => void;
+  pcOnly: () => void;
+  questOnly: () => void;
+  both: () => void;
 };
 
-export const AvelablePlatform = ({ avelablePlatform, onChange }: Props) => {
+export const AvelablePlatform = ({
+  avelablePlatform,
+  pcOnly,
+  questOnly,
+  both,
+}: Props) => {
   return (
     <MuiFormControl>
       <MuiFormLabel>Quest対応可否</MuiFormLabel>
@@ -29,7 +37,7 @@ export const AvelablePlatform = ({ avelablePlatform, onChange }: Props) => {
               avelablePlatform.pc === true && avelablePlatform.quest === false
             }
             onChange={() => {
-              onChange;
+              pcOnly;
             }}
           />
         }
@@ -47,7 +55,7 @@ export const AvelablePlatform = ({ avelablePlatform, onChange }: Props) => {
               avelablePlatform.pc === true && avelablePlatform.quest === true
             }
             onChange={() => {
-              onChange;
+              both;
             }}
           />
         }
@@ -65,7 +73,7 @@ export const AvelablePlatform = ({ avelablePlatform, onChange }: Props) => {
               avelablePlatform.pc === false && avelablePlatform.quest === true
             }
             onChange={() => {
-              onChange;
+              questOnly;
             }}
           />
         }
