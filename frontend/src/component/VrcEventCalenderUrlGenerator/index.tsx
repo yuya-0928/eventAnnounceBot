@@ -49,7 +49,7 @@ export const VrcEventCalenderUrlGenerator = () => {
       <MuiFormGroup>
         <EventName
           value={formik.values.eventName}
-          onChange={() => formik.handleChange}
+          onChange={formik.handleChange}
         />
         <AvelablePlatform
           avelablePlatform={formik.values.avelablePlatform}
