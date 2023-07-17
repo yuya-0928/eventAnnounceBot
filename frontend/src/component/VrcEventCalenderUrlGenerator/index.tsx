@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { EventName } from "./Form/EventName";
 import { AvelablePlatform } from "./Form/AvelablePlatform";
 import { Date } from "./Form/Date";
+import { StartTime } from "./Form/StartTime";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -66,22 +67,12 @@ export const VrcEventCalenderUrlGenerator = () => {
             );
           }}
         />
-
-        <MuiFormControl>
-          <MuiFormLabel>開始時刻</MuiFormLabel>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <TimeField
-              format="HH:mm"
-              onChange={(time: Dayjs | null) => {
-                void formik.setFieldValue(
-                  "startTime",
-                  dayjs(time).format("HH:mm")
-                );
-              }}
-              value={dayjs(formik.values.startTime, "HH:mm")}
-            />
-          </LocalizationProvider>
-        </MuiFormControl>
+        <StartTime
+          startTime={formik.values.startTime}
+          onChange={(time: Dayjs | null) => {
+            void formik.setFieldValue("startTime", dayjs(time).format("HH:mm"));
+          }}
+        />
         <MuiFormControl>
           <MuiFormLabel>終了時刻</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
