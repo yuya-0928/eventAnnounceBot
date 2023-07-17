@@ -12,6 +12,7 @@ import { TimeField } from "@mui/x-date-pickers/TimeField";
 import { useFormik } from "formik";
 import dayjs, { Dayjs } from "dayjs";
 import { useEffect } from "react";
+import { EventName } from "./Form/EventName";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -45,15 +46,10 @@ export const VrcEventCalenderUrlGenerator = () => {
     <form onSubmit={formik.handleSubmit}>
       <h2>VRChatイベントカレンダーURL生成</h2>
       <MuiFormGroup>
-        <MuiFormControl>
-          <MuiFormLabel>イベント名</MuiFormLabel>
-          <MuiTextField
-            name="eventName"
-            variant="outlined"
-            value={formik.values.eventName}
-            onChange={formik.handleChange}
-          />
-        </MuiFormControl>
+        <EventName
+          value={formik.values.eventName}
+          onChange={() => formik.handleChange}
+        />
         <MuiFormControl>
           <MuiFormLabel>Quest対応可否</MuiFormLabel>
           <MuiFormControlLabel
