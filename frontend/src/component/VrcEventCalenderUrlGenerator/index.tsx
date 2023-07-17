@@ -17,6 +17,7 @@ import { AvelablePlatform } from "./Form/AvelablePlatform";
 import { Date } from "./Form/Date";
 import { StartTime } from "./Form/StartTime";
 import { EndTime } from "./Form/EndTIme";
+import { EventOwner } from "./Form/EventOwner";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -80,15 +81,10 @@ export const VrcEventCalenderUrlGenerator = () => {
             void formik.setFieldValue("endTime", dayjs(time).format("HH:mm"));
           }}
         />
-        <MuiFormControl>
-          <MuiFormLabel>イベント主催者</MuiFormLabel>
-          <MuiTextField
-            name="eventName"
-            variant="outlined"
-            onChange={formik.handleChange}
-            value={formik.values.eventOwner}
-          />
-        </MuiFormControl>
+        <EventOwner
+          eventOwner={formik.values.eventOwner}
+          onChange={() => formik.handleChange}
+        />
         <MuiFormControl>
           <MuiFormLabel>イベント内容</MuiFormLabel>
           <MuiTextField
