@@ -19,6 +19,8 @@ import { StartTime } from "./Form/StartTime";
 import { EndTime } from "./Form/EndTIme";
 import { EventOwner } from "./Form/EventOwner";
 import { EventContent } from "./Form/EventContent";
+import { EventGenre } from "./Form/EventGenre";
+import { ParticipationConditions } from "./Form/ParticipationConditions";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -91,6 +93,12 @@ export const VrcEventCalenderUrlGenerator = () => {
           onChange={() => formik.handleChange}
         />
         <EventGenre />
+        <ParticipationConditions
+          participationConditions={formik.values.participationConditions}
+          onChange={() => {
+            formik.handleChange;
+          }}
+        />
         <MuiFormControl>
           <MuiFormLabel>参加方法</MuiFormLabel>
           <MuiTextField
