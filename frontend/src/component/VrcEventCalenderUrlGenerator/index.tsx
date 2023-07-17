@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import dayjs, { Dayjs } from "dayjs";
 import { useEffect } from "react";
 import { EventName } from "./Form/EventName";
+import { AvelablePlatform } from "./Form/AvelablePlatform";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const initialValues = {
@@ -50,78 +51,10 @@ export const VrcEventCalenderUrlGenerator = () => {
           value={formik.values.eventName}
           onChange={() => formik.handleChange}
         />
-        <MuiFormControl>
-          <MuiFormLabel>Quest対応可否</MuiFormLabel>
-          <MuiFormControlLabel
-            control={
-              <MuiCheckbox
-                name={"PCオンリー"}
-                value={"PCオンリー"}
-                defaultChecked={
-                  formik.values.avelablePlatform.pc === true &&
-                  formik.values.avelablePlatform.quest === false
-                }
-                checked={
-                  formik.values.avelablePlatform.pc === true &&
-                  formik.values.avelablePlatform.quest === false
-                }
-                onChange={() => {
-                  void formik.setFieldValue("avelablePlatform", {
-                    pc: true,
-                    quest: false,
-                  });
-                }}
-              />
-            }
-            label={"PCオンリー"}
-          />
-          <MuiFormControlLabel
-            control={
-              <MuiCheckbox
-                name={"PC/Quest両対応（Quest対応）"}
-                value={"PC/Quest両対応（Quest対応）"}
-                defaultChecked={
-                  formik.values.avelablePlatform.pc === true &&
-                  formik.values.avelablePlatform.quest === true
-                }
-                checked={
-                  formik.values.avelablePlatform.pc === true &&
-                  formik.values.avelablePlatform.quest === true
-                }
-                onChange={() => {
-                  void formik.setFieldValue("avelablePlatform", {
-                    pc: true,
-                    quest: true,
-                  });
-                }}
-              />
-            }
-            label={"PC/Quest両対応（Quest対応）"}
-          />
-          <MuiFormControlLabel
-            control={
-              <MuiCheckbox
-                name={"Quest オンリー"}
-                value={"Quest オンリー"}
-                defaultChecked={
-                  formik.values.avelablePlatform.pc === false &&
-                  formik.values.avelablePlatform.quest === true
-                }
-                checked={
-                  formik.values.avelablePlatform.pc === false &&
-                  formik.values.avelablePlatform.quest === true
-                }
-                onChange={() => {
-                  void formik.setFieldValue("avelablePlatform", {
-                    pc: false,
-                    quest: true,
-                  });
-                }}
-              />
-            }
-            label={"Quest オンリー"}
-          />
-        </MuiFormControl>
+        <AvelablePlatform
+          avelablePlatform={formik.values.avelablePlatform}
+          onChange={() => formik.handleChange}
+        />
         <MuiFormControl>
           <MuiFormLabel>日付</MuiFormLabel>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
