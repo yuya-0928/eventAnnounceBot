@@ -53,12 +53,12 @@ export const VrcEventCalenderUrlGenerator = () => {
         />
         <AvelablePlatform
           avelablePlatform={formik.values.avelablePlatform}
-          pcOnly={() =>
+          pcOnly={() => {
             void formik.setFieldValue("avelablePlatform", {
               pc: true,
               quest: false,
-            })
-          }
+            });
+          }}
           questOnly={() =>
             void formik.setFieldValue("avelablePlatform", {
               pc: false,

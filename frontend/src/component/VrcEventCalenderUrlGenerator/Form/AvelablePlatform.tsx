@@ -4,7 +4,6 @@ import {
   FormControl as MuiFormControl,
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
-import { useState } from "react";
 
 type Props = {
   avelablePlatform: {
@@ -33,12 +32,12 @@ export const AvelablePlatform = ({
             defaultChecked={
               avelablePlatform.pc === true && avelablePlatform.quest === false
             }
+            onChange={() => {
+              pcOnly();
+            }}
             checked={
               avelablePlatform.pc === true && avelablePlatform.quest === false
             }
-            onChange={() => {
-              pcOnly;
-            }}
           />
         }
         label={"PCオンリー"}
@@ -51,12 +50,12 @@ export const AvelablePlatform = ({
             defaultChecked={
               avelablePlatform.pc === true && avelablePlatform.quest === true
             }
+            onChange={() => {
+              both();
+            }}
             checked={
               avelablePlatform.pc === true && avelablePlatform.quest === true
             }
-            onChange={() => {
-              both;
-            }}
           />
         }
         label={"PC/Quest両対応（Quest対応）"}
@@ -69,12 +68,12 @@ export const AvelablePlatform = ({
             defaultChecked={
               avelablePlatform.pc === false && avelablePlatform.quest === true
             }
+            onChange={() => {
+              questOnly();
+            }}
             checked={
               avelablePlatform.pc === false && avelablePlatform.quest === true
             }
-            onChange={() => {
-              questOnly;
-            }}
           />
         }
         label={"Quest オンリー"}
