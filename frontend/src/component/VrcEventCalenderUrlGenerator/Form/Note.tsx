@@ -3,10 +3,11 @@ import {
   TextField as MuiTextField,
   FormControl as MuiFormControl,
 } from "@material-ui/core";
+import { ChangeEventHandler } from "react";
 
 type Props = {
   note: string;
-  onChange: () => void;
+  onChange: () => ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 export const Note = ({ note, onChange }: Props) => {
@@ -14,9 +15,9 @@ export const Note = ({ note, onChange }: Props) => {
     <MuiFormControl>
       <MuiFormLabel>備考</MuiFormLabel>
       <MuiTextField
-        name="eventName"
+        name="note"
         variant="outlined"
-        onChange={onChange}
+        onChange={onChange()}
         value={note}
       />
     </MuiFormControl>
