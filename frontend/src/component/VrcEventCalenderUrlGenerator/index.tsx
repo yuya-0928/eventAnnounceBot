@@ -106,7 +106,7 @@ export const VrcEventCalenderUrlGenerator = () => {
         />
         <EventContent
           eventContent={formik.values.evnetContent}
-          onChange={() => formik.handleChange}
+          onChange={formik.handleChange}
         />
         <EventGenre
           initialValue={formik.values.eventGenre}

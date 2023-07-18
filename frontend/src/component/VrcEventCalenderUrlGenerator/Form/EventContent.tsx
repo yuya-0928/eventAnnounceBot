@@ -2,14 +2,12 @@ import {
   FormLabel as MuiFormLabel,
   TextField as MuiTextField,
   FormControl as MuiFormControl,
-  FormGroup as MuiFormGroup,
-  FormControlLabel as MuiFormControlLabel,
-  Checkbox as MuiCheckbox,
 } from "@material-ui/core";
+import { ChangeEventHandler } from "react";
 
 type Props = {
   eventContent: string;
-  onChange: () => void;
+  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 export const EventContent = ({ eventContent, onChange }: Props) => {
@@ -17,7 +15,7 @@ export const EventContent = ({ eventContent, onChange }: Props) => {
     <MuiFormControl>
       <MuiFormLabel>イベント内容</MuiFormLabel>
       <MuiTextField
-        name="eventName"
+        name="evnetContent"
         variant="outlined"
         onChange={onChange}
         value={eventContent}
