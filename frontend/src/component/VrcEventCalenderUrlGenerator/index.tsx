@@ -141,7 +141,12 @@ export const VrcEventCalenderUrlGenerator = () => {
         `&entry.1285455202=${values.wayToParticipate}`,
         `&entry.586354013=${values.note}`,
       ];
-      console.log(eventCalenderUrl.join());
+      const eventGenreUrl: string[] = [];
+      getEventGenreArray(values.eventGenre).forEach((genre) =>
+        eventCalenderUrl.push(`&entry.1606730788=${genre}`)
+      );
+      eventCalenderUrl.push(eventGenreUrl.join(""));
+      console.dir(eventCalenderUrl.join(""));
     },
   });
 
