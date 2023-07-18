@@ -5,11 +5,26 @@ import {
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
 
-export const NoticeForOverseasUsers = () => {
+type Props = {
+  initialValue: boolean;
+  setValue: (value: boolean) => void;
+};
+
+export const NoticeForOverseasUsers = ({ initialValue, setValue }: Props) => {
   return (
     <MuiFormControl>
       <MuiFormLabel>海外ユーザー向け告知</MuiFormLabel>
-      <MuiFormControlLabel control={<MuiCheckbox />} label={"希望する"} />
+      <MuiFormControlLabel
+        control={
+          <MuiCheckbox
+            checked={initialValue}
+            onChange={(e) => {
+              setValue(e.target.checked);
+            }}
+          />
+        }
+        label={"希望する"}
+      />
     </MuiFormControl>
   );
 };
