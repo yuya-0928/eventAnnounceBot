@@ -51,6 +51,7 @@ export const VrcEventCalenderUrlGenerator = () => {
       "UnityでもBlenderでも、マイコンでもC言語でも、HTMLでもPHPでも、技術と関わりがある人であればOKです！参加する際は、ジュース、お酒など飲み物を用意してきてください！",
     wayToParticipate: "「慕狼ゆに」にJoinして下さい！",
     note: "告知ツイートのURLやタイムスケジュールなどあればご記載ください%0Ahttps://twitter.com/VRCENGAssoc/status/${postTweet.data.id}%0A%0A参加する際は、ジュース、お酒など飲み物を用意してきてください！%0A22:00+~+23:00+イベント時間%0A23:00+~+23:10+記念撮影%0A23:10+~+23:40++軽い自己紹介タイム%0Aその後は自由に雑談したりお酒飲んだり",
+    boticeForOverseasUsers: false,
   };
 
   const formik = useFormik({
@@ -123,7 +124,12 @@ export const VrcEventCalenderUrlGenerator = () => {
           onChange={() => formik.handleChange}
         />
         <Note note={formik.values.note} onChange={() => formik.handleChange} />
-        <NoticeForOverseasUsers />
+        <NoticeForOverseasUsers
+          initialValue={formik.values.boticeForOverseasUsers}
+          setValue={(value: boolean) => {
+            void formik.setFieldValue(`boticeForOverseasUsers`, value);
+          }}
+        />
       </MuiFormGroup>
     </form>
   );
