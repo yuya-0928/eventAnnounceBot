@@ -214,6 +214,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             void formik.setFieldValue(`boticeForOverseasUsers`, value);
           }}
         />
+        <button type="submit">Submit</button>
       </MuiFormGroup>
     </form>
   );
