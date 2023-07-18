@@ -126,8 +126,22 @@ export const VrcEventCalenderUrlGenerator = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
-      console.log("submit");
+    onSubmit: (values) => {
+      const eventCalenderUrl = [
+        "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform?usp=pp_url",
+        `&entry.426573786=${values.eventName}`,
+        `&entry.1261006949=${getAvelablePlatform(values.avelablePlatform)}`,
+        `&entry.450203369=${dayjs(values.date).format("YYYY-MM-DD")}`,
+        `&entry.1010494053=${values.startTime}`,
+        `&entry.203043324=${values.endTime}`,
+        `&entry.1540217995=${values.eventOwner}`,
+        `&entry.701384676=${values.evnetContent}`,
+        `&entry.1606730788=${getEventGenreArray(values.eventGenre).join()}`,
+        `&entry.2064647146=${values.participationConditions}`,
+        `&entry.1285455202=${values.wayToParticipate}`,
+        `&entry.586354013=${values.note}`,
+      ];
+      console.log(eventCalenderUrl.join());
     },
   });
 
