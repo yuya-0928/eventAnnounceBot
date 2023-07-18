@@ -54,6 +54,60 @@ export const VrcEventCalenderUrlGenerator = () => {
     boticeForOverseasUsers: false,
   };
 
+  const getEventGenreArray = (eventGenres: {
+    avaterFitting: boolean;
+    modifiedAvaterExchange: boolean;
+    otherNetworkingEvent: boolean;
+    vrDrinkingParty: boolean;
+    storeEvent: boolean;
+    musicEvent: boolean;
+    academicEvent: boolean;
+    rolePlay: boolean;
+    eventForBeginners: boolean;
+    regularEvent: boolean;
+  }) =>
+    Object.entries(eventGenres)
+      .filter((genre) => genre[1] === true)
+      .map((genre) => {
+        {
+          switch (genre[0]) {
+            case "avaterFitting":
+              return "アバター試着会";
+              break;
+            case "modifiedAvaterExchange":
+              return "改変アバター交流会";
+              break;
+            case "otherNetworkingEvent":
+              return "その他交流会";
+              break;
+            case "vrDrinkingParty":
+              return "VR飲み会";
+              break;
+            case "storeEvent":
+              return "店舗系イベント";
+              break;
+            case "musicEvent":
+              return "音楽系イベント";
+              break;
+            case "academicEvent":
+              return "学術系イベント";
+              break;
+            case "rolePlay":
+              return "ロールプレイ";
+              break;
+            case "eventForBeginners":
+              return "初心者向けイベント";
+              break;
+            case "regularEvent":
+              return "定期イベント";
+              break;
+            default:
+              return "";
+              break;
+          }
+        }
+      });
+
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
