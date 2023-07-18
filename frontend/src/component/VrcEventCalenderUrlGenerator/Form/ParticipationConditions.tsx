@@ -3,10 +3,11 @@ import {
   TextField as MuiTextField,
   FormControl as MuiFormControl,
 } from "@material-ui/core";
+import { ChangeEventHandler } from "react";
 
 type Props = {
   participationConditions: string;
-  onChange: () => void;
+  onChange: () => ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 export const ParticipationConditions = ({
@@ -17,9 +18,9 @@ export const ParticipationConditions = ({
     <MuiFormControl>
       <MuiFormLabel>参加条件（モデル、人数制限など）</MuiFormLabel>
       <MuiTextField
-        name="eventName"
+        name="participationConditions"
         variant="outlined"
-        onChange={onChange}
+        onChange={onChange()}
         value={participationConditions}
       />
     </MuiFormControl>

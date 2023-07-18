@@ -116,9 +116,7 @@ export const VrcEventCalenderUrlGenerator = () => {
         />
         <ParticipationConditions
           participationConditions={formik.values.participationConditions}
-          onChange={() => {
-            formik.handleChange;
-          }}
+          onChange={() => formik.handleChange}
         />
         <WayToParticipate
           wayToParticipate={formik.values.wayToParticipate}
