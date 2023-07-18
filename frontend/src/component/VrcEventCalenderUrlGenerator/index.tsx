@@ -54,6 +54,22 @@ export const VrcEventCalenderUrlGenerator = () => {
     boticeForOverseasUsers: false,
   };
 
+  const getAvelablePlatform = (avelablePlatform: {
+    pc: boolean;
+    quest: boolean;
+  }) => {
+    const { pc, quest } = avelablePlatform;
+    if (pc && quest) {
+      return "PC/Quest両対応（Quest対応）";
+    } else if (pc) {
+      return "PC対応";
+    } else if (quest) {
+      return "Quest対応";
+    } else {
+      return "";
+    }
+  };
+
   const getEventGenreArray = (eventGenres: {
     avaterFitting: boolean;
     modifiedAvaterExchange: boolean;
