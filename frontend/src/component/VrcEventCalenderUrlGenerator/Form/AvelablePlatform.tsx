@@ -6,21 +6,14 @@ import {
 } from "@material-ui/core";
 
 type Props = {
-  avelablePlatform: {
+  initialValue: {
     pc: boolean;
     quest: boolean;
   };
-  pcOnly: () => void;
-  questOnly: () => void;
-  both: () => void;
+  setPlatformValue: (key: string, value: boolean) => void;
 };
 
-export const AvelablePlatform = ({
-  avelablePlatform,
-  pcOnly,
-  questOnly,
-  both,
-}: Props) => {
+export const AvelablePlatform = ({ initialValue, setPlatformValue }: Props) => {
   return (
     <MuiFormControl>
       <MuiFormLabel>Quest対応可否</MuiFormLabel>
@@ -29,15 +22,11 @@ export const AvelablePlatform = ({
           <MuiCheckbox
             name={"PCオンリー"}
             value={"PCオンリー"}
-            defaultChecked={
-              avelablePlatform.pc === true && avelablePlatform.quest === false
-            }
-            onChange={() => {
-              pcOnly();
+            checked={initialValue.pc === true && initialValue.quest === false}
+            onChange={(e) => {
+              setPlatformValue(`pc`, true);
+              setPlatformValue(`quest`, false);
             }}
-            checked={
-              avelablePlatform.pc === true && avelablePlatform.quest === false
-            }
           />
         }
         label={"PCオンリー"}
@@ -47,15 +36,11 @@ export const AvelablePlatform = ({
           <MuiCheckbox
             name={"PC/Quest両対応（Quest対応）"}
             value={"PC/Quest両対応（Quest対応）"}
-            defaultChecked={
-              avelablePlatform.pc === true && avelablePlatform.quest === true
-            }
+            checked={initialValue.pc === true && initialValue.quest === true}
             onChange={() => {
-              both();
+              setPlatformValue(`pc`, true);
+              setPlatformValue(`quest`, true);
             }}
-            checked={
-              avelablePlatform.pc === true && avelablePlatform.quest === true
-            }
           />
         }
         label={"PC/Quest両対応（Quest対応）"}
@@ -65,15 +50,11 @@ export const AvelablePlatform = ({
           <MuiCheckbox
             name={"Quest オンリー"}
             value={"Quest オンリー"}
-            defaultChecked={
-              avelablePlatform.pc === false && avelablePlatform.quest === true
-            }
+            checked={initialValue.pc === false && initialValue.quest === true}
             onChange={() => {
-              questOnly();
+              setPlatformValue(`pc`, false);
+              setPlatformValue(`quest`, true);
             }}
-            checked={
-              avelablePlatform.pc === false && avelablePlatform.quest === true
-            }
           />
         }
         label={"Quest オンリー"}

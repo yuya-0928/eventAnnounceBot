@@ -73,25 +73,10 @@ export const VrcEventCalenderUrlGenerator = () => {
           onChange={formik.handleChange}
         />
         <AvelablePlatform
-          avelablePlatform={formik.values.avelablePlatform}
-          pcOnly={() => {
-            void formik.setFieldValue("avelablePlatform", {
-              pc: true,
-              quest: false,
-            });
+          initialValue={formik.values.avelablePlatform}
+          setPlatformValue={(key: string, value: boolean) => {
+            void formik.setFieldValue(`avelablePlatform.${key}`, value);
           }}
-          questOnly={() =>
-            void formik.setFieldValue("avelablePlatform", {
-              pc: false,
-              quest: true,
-            })
-          }
-          both={() =>
-            void formik.setFieldValue("avelablePlatform", {
-              pc: true,
-              quest: true,
-            })
-          }
         />
         <Date
           date={formik.values.date}
