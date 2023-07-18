@@ -7,7 +7,7 @@ import { ChangeEventHandler } from "react";
 
 type Props = {
   eventContent: string;
-  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onChange: () => ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 export const EventContent = ({ eventContent, onChange }: Props) => {
@@ -17,7 +17,7 @@ export const EventContent = ({ eventContent, onChange }: Props) => {
       <MuiTextField
         name="evnetContent"
         variant="outlined"
-        onChange={onChange}
+        onChange={onChange()}
         value={eventContent}
       />
     </MuiFormControl>
