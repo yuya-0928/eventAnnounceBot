@@ -70,7 +70,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
         <FormControlLabel
           control={
             <Checkbox
-              name="isTestModeToggle"
+              name="isTestMode"
               id="test-mode"
               onChange={formik.handleChange}
               value={formik.values.isTestMode}
