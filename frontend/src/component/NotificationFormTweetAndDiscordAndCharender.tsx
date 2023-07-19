@@ -11,14 +11,13 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
   const initialValues = {
     numberOfSessions: "",
     date: "",
-    isTestModeToggle: false,
+    isTestMode: false,
     textData: "次の金曜日も開催するよーーー！ 良かったら遊びにきてねーー！！",
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
-      console.log("submit");
       fetch("http://localhost:3001/post_announcement", {
         method: "POST",
         headers: {
@@ -27,7 +26,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
         body: JSON.stringify({
           numberOfSessions: formik.values.numberOfSessions,
           date: formik.values.date,
-          isTestModeToggle: formik.values.isTestModeToggle,
+          isTestMode: formik.values.isTestMode,
           textData: formik.values.textData,
         }),
       })
@@ -39,10 +38,6 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
         });
     },
   });
-
-  useEffect(() => {
-    console.log(formik.values);
-  }, [formik.values]);
 
   return (
     <>
@@ -64,7 +59,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
           <DatePicker
             onChange={(newValue) => {
               formik
-                .setFieldValue("date", dayjs(newValue).format(), true)
+                .setFieldValue("date", dayjs(newValue).format('YYYY-MM-DD'), true)
                 .catch(() => {
                   console.log("error");
                 });
@@ -75,10 +70,10 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
         <FormControlLabel
           control={
             <Checkbox
-              name="isTestModeToggle"
+              name="isTestMode"
               id="test-mode"
               onChange={formik.handleChange}
-              value={formik.values.isTestModeToggle}
+              value={formik.values.isTestMode}
             />
           }
           label="テストモード"

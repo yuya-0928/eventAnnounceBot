@@ -12,10 +12,9 @@ export const formData = (req: express.Request): TypeFormData => {
   console.log(req.body);
   const numberOfSessions = req.body.numberOfSessions ?? "";
   const date = req.body.date ?? "";
-  const isTestModeToggle = req.body.isTestModeToggle ?? "";
   const textData = req.body.textData ?? "";
   const dateAry = date.split("-");
-  const isTestMode = isTestModeToggle === "on" ?? false;
+  const isTestMode = req.body.isTestMode ?? false;
 
   console.log({
     date: date,

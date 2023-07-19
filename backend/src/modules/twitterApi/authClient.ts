@@ -14,7 +14,7 @@ const checkNotUndefined = (token: string | undefined) => {
 export const authClient = new OAuth2User({
   client_id: checkNotUndefined(env.TWITTER_CLIENT_ID),
   client_secret: env.TWITTER_CLIENT_SECRET,
-  callback: "http://localhost:3000/callback",
+  callback: "http://localhost:3001/callback",
   scopes: ["tweet.read", "tweet.write", "users.read", "offline.access"],
 });
 
