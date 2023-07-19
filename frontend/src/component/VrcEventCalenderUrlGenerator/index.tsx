@@ -1,7 +1,7 @@
 import { FormGroup as MuiFormGroup } from "@material-ui/core";
 import { useFormik } from "formik";
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { EventName } from "./Form/EventName";
 import { AvelablePlatform } from "./Form/AvelablePlatform";
 import { Date } from "./Form/Date";
@@ -16,6 +16,8 @@ import { Note } from "./Form/Note";
 import { NoticeForOverseasUsers } from "./Form/NoticeForOverseasUsers";
 
 export const VrcEventCalenderUrlGenerator = () => {
+  const [url, setUrl] = useState('');
+  
   const initialValues = {
     eventName: "エンジニア作業飲み集会",
     avelablePlatform: { pc: true, quest: true },
@@ -147,6 +149,7 @@ export const VrcEventCalenderUrlGenerator = () => {
       );
       eventCalenderUrl.push(eventGenreUrl.join(""));
       console.dir(eventCalenderUrl.join(""));
+      setUrl(eventCalenderUrl.join(""));
     },
   });
 
@@ -155,72 +158,77 @@ export const VrcEventCalenderUrlGenerator = () => {
   }, [formik.values]);
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <h2>VRChatイベントカレンダーURL生成</h2>
-      <MuiFormGroup>
-        <EventName
-          value={formik.values.eventName}
-          onChange={() => formik.handleChange}
-        />
-        <AvelablePlatform
-          initialValue={formik.values.avelablePlatform}
-          setPlatformValue={(key: string, value: boolean) => {
-            void formik.setFieldValue(`avelablePlatform.${key}`, value);
-          }}
-        />
-        <Date
-          date={formik.values.date}
-          onChange={(newValue) => {
-            void formik.setFieldValue(
-              "date",
-              dayjs(newValue).format("YYYY-MM-DD"),
-              true
-            );
-          }}
-        />
-        <StartTime
-          startTime={formik.values.startTime}
-          onChange={(time: Dayjs | null) => {
-            void formik.setFieldValue("startTime", dayjs(time).format("HH:mm"));
-          }}
-        />
-        <EndTime
-          endTime={formik.values.endTime}
-          onChange={(time: Dayjs | null) => {
-            void formik.setFieldValue("endTime", dayjs(time).format("HH:mm"));
-          }}
-        />
-        <EventOwner
-          eventOwner={formik.values.eventOwner}
-          onChange={() => formik.handleChange}
-        />
-        <EventContent
-          eventContent={formik.values.evnetContent}
-          onChange={() => formik.handleChange}
-        />
-        <EventGenre
-          initialValue={formik.values.eventGenre}
-          setEventGenre={(key: string, value: boolean) => {
-            void formik.setFieldValue(`eventGenre.${key}`, value);
-          }}
-        />
-        <ParticipationConditions
-          participationConditions={formik.values.participationConditions}
-          onChange={() => formik.handleChange}
-        />
-        <WayToParticipate
-          wayToParticipate={formik.values.wayToParticipate}
-          onChange={() => formik.handleChange}
-        />
-        <Note note={formik.values.note} onChange={() => formik.handleChange} />
-        <NoticeForOverseasUsers
-          initialValue={formik.values.boticeForOverseasUsers}
-          setValue={(value: boolean) => {
-            void formik.setFieldValue(`boticeForOverseasUsers`, value);
-          }}
-        />
-        <button type="submit">Submit</button>
-      </MuiFormGroup>
-    </form>
+    <>
+      <form onSubmit={formik.handleSubmit}>
+        <h2>VRChatイベントカレンダーURL生成</h2>
+        <MuiFormGroup>
+          <EventName
+            value={formik.values.eventName}
+            onChange={() => formik.handleChange}
+          />
+          <AvelablePlatform
+            initialValue={formik.values.avelablePlatform}
+            setPlatformValue={(key: string, value: boolean) => {
+              void formik.setFieldValue(`avelablePlatform.${key}`, value);
+            }}
+          />
+          <Date
+            date={formik.values.date}
+            onChange={(newValue) => {
+              void formik.setFieldValue(
+                "date",
+                dayjs(newValue).format("YYYY-MM-DD"),
+                true
+              );
+            }}
+          />
+          <StartTime
+            startTime={formik.values.startTime}
+            onChange={(time: Dayjs | null) => {
+              void formik.setFieldValue("startTime", dayjs(time).format("HH:mm"));
+            }}
+          />
+          <EndTime
+            endTime={formik.values.endTime}
+            onChange={(time: Dayjs | null) => {
+              void formik.setFieldValue("endTime", dayjs(time).format("HH:mm"));
+            }}
+          />
+          <EventOwner
+            eventOwner={formik.values.eventOwner}
+            onChange={() => formik.handleChange}
+          />
+          <EventContent
+            eventContent={formik.values.evnetContent}
+            onChange={() => formik.handleChange}
+          />
+          <EventGenre
+            initialValue={formik.values.eventGenre}
+            setEventGenre={(key: string, value: boolean) => {
+              void formik.setFieldValue(`eventGenre.${key}`, value);
+            }}
+          />
+          <ParticipationConditions
+            participationConditions={formik.values.participationConditions}
+            onChange={() => formik.handleChange}
+          />
+          <WayToParticipate
+            wayToParticipate={formik.values.wayToParticipate}
+            onChange={() => formik.handleChange}
+          />
+          <Note note={formik.values.note} onChange={() => formik.handleChange} />
+          <NoticeForOverseasUsers
+            initialValue={formik.values.boticeForOverseasUsers}
+            setValue={(value: boolean) => {
+              void formik.setFieldValue(`boticeForOverseasUsers`, value);
+            }}
+          />
+          <button type="submit">Submit</button>
+        </MuiFormGroup>
+      </form>
+      {url !== '' && 
+      <a href={url}>カレンダーURL</a>
+      }
+    </>
   );
 };
