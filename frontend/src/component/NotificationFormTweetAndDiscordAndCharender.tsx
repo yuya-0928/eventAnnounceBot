@@ -59,7 +59,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
           <DatePicker
             onChange={(newValue) => {
               formik
-                .setFieldValue("date", dayjs(newValue).format(), true)
+                .setFieldValue("date", dayjs(newValue).format('YYYY-MM-DD'), true)
                 .catch(() => {
                   console.log("error");
                 });
