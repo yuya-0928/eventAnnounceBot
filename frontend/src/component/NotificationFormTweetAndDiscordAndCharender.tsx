@@ -11,7 +11,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
   const initialValues = {
     numberOfSessions: "",
     date: "",
-    isTestModeToggle: false,
+    isTestMode: false,
     textData: "次の金曜日も開催するよーーー！ 良かったら遊びにきてねーー！！",
   };
 
@@ -26,7 +26,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
         body: JSON.stringify({
           numberOfSessions: formik.values.numberOfSessions,
           date: formik.values.date,
-          isTestModeToggle: formik.values.isTestModeToggle,
+          isTestMode: formik.values.isTestMode,
           textData: formik.values.textData,
         }),
       })
@@ -73,7 +73,7 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
               name="isTestModeToggle"
               id="test-mode"
               onChange={formik.handleChange}
-              value={formik.values.isTestModeToggle}
+              value={formik.values.isTestMode}
             />
           }
           label="テストモード"
