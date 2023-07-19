@@ -30,7 +30,7 @@ app.get("/callback", async (req: express.Request, res: express.Response) => {
     const { code, state } = req.query;
     if (state !== STATE) return res.status(500).send("State isn't matching");
     await authClient.requestAccessToken(code as string);
-    res.redirect("/");
+    res.redirect("http://localhost:3000/");
   } catch (error) {
     console.log(error);
   }
