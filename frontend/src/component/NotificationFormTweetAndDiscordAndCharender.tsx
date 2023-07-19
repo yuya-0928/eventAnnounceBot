@@ -18,7 +18,6 @@ export const NotificationFormTweetAndDiscordAndCharender = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
-      console.log("submit");
       fetch("http://localhost:3001/post_announcement", {
         method: "POST",
         headers: {
