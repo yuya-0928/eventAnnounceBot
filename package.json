@@ -6,7 +6,7 @@
   "author": "yuni-0928 <yuniyuni0928@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn start:backend & yarn start:frontend",
+    "start": "yarn run npm-run-all -p -r start:backend start:frontend",
     "start:backend": "cd backend && yarn start",
     "start:frontend": "cd frontend && yarn dev"
   },
