@@ -14,7 +14,8 @@ import { ParticipationConditions } from "./parts/ParticipationConditions";
 import { WayToParticipate } from "./parts/WayToParticipate";
 import { Note } from "./parts/Note";
 import { NoticeForOverseasUsers } from "./parts/NoticeForOverseasUsers";
-import { AvailablePlatformType, EventGenreType, VrcEventCalenderType } from "../../types/VrcEventCalenderType";
+import { VrcEventCalenderType } from "../../types/VrcEventCalenderType";
+import { createVrcEventCalenderUrl } from "./createVrcEventCalenderUrl";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const [url, setUrl] = useState('');
@@ -47,89 +48,11 @@ export const VrcEventCalenderUrlGenerator = () => {
     noticeForOverseasUsers: false,
   };
 
-  // TODO: 名前を変える。AvailablePlatformを受け取って、文字列を返す関数なのでreplaceAvailablePlatformForUrl
-  const getAvelablePlatform = (availablePlatform: AvailablePlatformType) => {
-    switch (availablePlatform) {
-      case "PC&Quest":
-        return "PC/Quest両対応";
-        break;
-      case "PC":
-        return "PC対応";
-        break;
-      case "Quest":
-        return "Quest対応";
-        break;
-    }
-  };
-
-  // TODO: 名前を変える。AvailablePlatformを受け取って、文字列を返す関数なのでreplaceEventGenreForUrl
-  const getEventGenreArray = (eventGenres: EventGenreType) =>
-    Object.entries(eventGenres)
-      .filter((genre) => genre[1] === true)
-      .map((genre) => {
-        {
-          switch (genre[0]) {
-            case "avatarFittingEvent":
-              return "アバター試着会";
-              break;
-            case "modifiedAvaterExchangeEvent":
-              return "改変アバター交流会";
-              break;
-            case "otherNetworkingEvent":
-              return "その他交流会";
-              break;
-            case "vrDrinkingEvent":
-              return "VR飲み会";
-              break;
-            case "storeEvent":
-              return "店舗系イベント";
-              break;
-            case "musicEvent":
-              return "音楽系イベント";
-              break;
-            case "academicEvent":
-              return "学術系イベント";
-              break;
-            case "rolePlayEvent":
-              return "ロールプレイ";
-              break;
-            case "forBeginnersEvent":
-              return "初心者向けイベント";
-              break;
-            case "regularEvent":
-              return "定期イベント";
-              break;
-            default:
-              return "";
-              break;
-          }
-        }
-      });
-
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      const eventCalenderUrl = [
-        "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform?usp=pp_url",
-        `&entry.426573786=${values.eventName}`,
-        `&entry.1261006949=${getAvelablePlatform(values.availablePlatform)}`,
-        `&entry.450203369=${dayjs(values.date).format("YYYY-MM-DD")}`,
-        `&entry.1010494053=${values.startTime}`,
-        `&entry.203043324=${values.endTime}`,
-        `&entry.1540217995=${values.eventOwner}`,
-        `&entry.701384676=${values.eventContent}`,
-        `&entry.1606730788=${getEventGenreArray(values.eventGenre).join()}`,
-        `&entry.2064647146=${values.participationConditions}`,
-        `&entry.1285455202=${values.wayToParticipate}`,
-        `&entry.586354013=${values.note}`,
-      ];
-      const eventGenreUrl: string[] = [];
-      getEventGenreArray(values.eventGenre).forEach((genre) =>
-        eventCalenderUrl.push(`&entry.1606730788=${genre}`)
-      );
-      eventCalenderUrl.push(eventGenreUrl.join(""));
-      console.dir(eventCalenderUrl.join(""));
-      setUrl(eventCalenderUrl.join(""));
+      const eventCalenderUrl = createVrcEventCalenderUrl(values)
+      setUrl(eventCalenderUrl);
     },
   });
 
