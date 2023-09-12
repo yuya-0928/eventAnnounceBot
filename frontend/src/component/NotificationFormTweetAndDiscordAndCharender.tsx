@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import dayjs from "dayjs";
 
-export const NotificationFormTweetAndDiscordAndCharender = () => {
+export const NotificationFormTweetAndDiscordAndCalender = () => {
   const initialValues = {
     numberOfSessions: "",
     date: "",
