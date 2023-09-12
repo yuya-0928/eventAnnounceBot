@@ -11,7 +11,7 @@ type Props = {
   onChange: (value: AvailablePlatformType) => void;
 };
 
-export const AvelablePlatform = ({ initialValue, onChange }: Props) => {
+export const AvailablePlatform = ({ initialValue, onChange }: Props) => {
   return (
     <MuiFormControl>
       <MuiFormLabel>Quest対応可否</MuiFormLabel>

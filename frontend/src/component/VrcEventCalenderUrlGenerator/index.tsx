@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import { EventName } from "./parts/EventName";
-import { AvelablePlatform } from "./parts/AvelablePlatform";
+import { AvailablePlatform } from "./parts/AvailablePlatform";
 import { Date } from "./parts/Date";
 import { StartTime } from "./parts/StartTime";
 import { EndTime } from "./parts/EndTIme";
@@ -69,7 +69,7 @@ export const VrcEventCalenderUrlGenerator = () => {
             value={formik.values.eventName}
             onChange={() => formik.handleChange}
           />
-          <AvelablePlatform
+          <AvailablePlatform
             initialValue={formik.values.availablePlatform}
             onChange={(value) => void formik.setFieldValue("availablePlatform", value)}
           />
