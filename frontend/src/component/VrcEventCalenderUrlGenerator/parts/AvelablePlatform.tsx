@@ -4,16 +4,14 @@ import {
   FormControl as MuiFormControl,
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
+import { AvailablePlatformType } from "../../../types/VrcEventCalenderType";
 
 type Props = {
-  initialValue: {
-    pc: boolean;
-    quest: boolean;
-  };
-  setPlatformValue: (key: string, value: boolean) => void;
+  initialValue: AvailablePlatformType;
+  onChange: (value: AvailablePlatformType) => void;
 };
 
-export const AvelablePlatform = ({ initialValue, setPlatformValue }: Props) => {
+export const AvelablePlatform = ({ initialValue, onChange }: Props) => {
   return (
     <MuiFormControl>
       <MuiFormLabel>Quest対応可否</MuiFormLabel>
@@ -22,11 +20,8 @@ export const AvelablePlatform = ({ initialValue, setPlatformValue }: Props) => {
           <MuiCheckbox
             name={"PCオンリー"}
             value={"PCオンリー"}
-            checked={initialValue.pc === true && initialValue.quest === false}
-            onChange={(e) => {
-              setPlatformValue(`pc`, true);
-              setPlatformValue(`quest`, false);
-            }}
+            checked={initialValue === "PC"}
+            onChange={() => onChange("PC")}
           />
         }
         label={"PCオンリー"}
@@ -36,11 +31,8 @@ export const AvelablePlatform = ({ initialValue, setPlatformValue }: Props) => {
           <MuiCheckbox
             name={"PC/Quest両対応（Quest対応）"}
             value={"PC/Quest両対応（Quest対応）"}
-            checked={initialValue.pc === true && initialValue.quest === true}
-            onChange={() => {
-              setPlatformValue(`pc`, true);
-              setPlatformValue(`quest`, true);
-            }}
+            checked={initialValue === "PC&Quest"}
+            onChange={() => onChange("PC&Quest")}
           />
         }
         label={"PC/Quest両対応（Quest対応）"}
@@ -50,11 +42,8 @@ export const AvelablePlatform = ({ initialValue, setPlatformValue }: Props) => {
           <MuiCheckbox
             name={"Quest オンリー"}
             value={"Quest オンリー"}
-            checked={initialValue.pc === false && initialValue.quest === true}
-            onChange={() => {
-              setPlatformValue(`pc`, false);
-              setPlatformValue(`quest`, true);
-            }}
+            checked={initialValue === "Quest"}
+            onChange={() => onChange("Quest")}
           />
         }
         label={"Quest オンリー"}
