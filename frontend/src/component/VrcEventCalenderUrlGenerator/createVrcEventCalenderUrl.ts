@@ -29,13 +29,10 @@ const replaceAvailablePlatformForUrl = (
   switch (availablePlatform) {
     case "PC&Quest":
       return "PC/Quest両対応（Quest対応）";
-      break;
     case "PC":
       return "PC対応";
-      break;
     case "Quest":
       return "Quest対応";
-      break;
   }
 };
 
@@ -47,37 +44,24 @@ const replaceEventGenreForUrl = (eventGenres: EventGenreType) =>
         switch (genre[0]) {
           case "avatarFittingEvent":
             return "アバター試着会";
-            break;
           case "modifiedAvaterExchangeEvent":
             return "改変アバター交流会";
-            break;
           case "otherNetworkingEvent":
             return "その他交流会";
-            break;
           case "vrDrinkingEvent":
             return "VR飲み会";
-            break;
           case "storeEvent":
             return "店舗系イベント";
-            break;
           case "musicEvent":
             return "音楽系イベント";
-            break;
           case "academicEvent":
             return "学術系イベント";
-            break;
           case "rolePlayEvent":
             return "ロールプレイ";
-            break;
           case "forBeginnersEvent":
             return "初心者向けイベント";
-            break;
           case "regularEvent":
             return "定期イベント";
-            break;
-          default:
-            return "";
-            break;
         }
       }
     });
