@@ -20,6 +20,7 @@ const googleFormEntryIds = {
   participationConditions: "2064647146",
   wayToParticipate: "1285455202",
   note: "586354013",
+  noticeForOverseasUsers: "1607289186",
 };
 
 const replaceAvailablePlatformForUrl = (
@@ -104,6 +105,10 @@ export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
     eventCalenderUrl.push(`&entry.${googleFormEntryIds.eventGenre}=${genre}`)
   );
   eventCalenderUrl.push(eventGenreUrl.join(""));
+  if (values.noticeForOverseasUsers)
+    eventCalenderUrl.push(
+      `&entry.${googleFormEntryIds.noticeForOverseasUsers}=希望する`
+    );
   console.dir(eventCalenderUrl.join(""));
   return eventCalenderUrl.join("");
 };
