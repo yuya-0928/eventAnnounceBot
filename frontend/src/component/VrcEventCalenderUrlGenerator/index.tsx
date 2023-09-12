@@ -2,22 +2,22 @@ import { FormGroup as MuiFormGroup } from "@material-ui/core";
 import { useFormik } from "formik";
 import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
-import { EventName } from "./Form/EventName";
-import { AvelablePlatform } from "./Form/AvelablePlatform";
-import { Date } from "./Form/Date";
-import { StartTime } from "./Form/StartTime";
-import { EndTime } from "./Form/EndTIme";
-import { EventOwner } from "./Form/EventOwner";
-import { EventContent } from "./Form/EventContent";
-import { EventGenre } from "./Form/EventGenre";
-import { ParticipationConditions } from "./Form/ParticipationConditions";
-import { WayToParticipate } from "./Form/WayToParticipate";
-import { Note } from "./Form/Note";
-import { NoticeForOverseasUsers } from "./Form/NoticeForOverseasUsers";
+import { EventName } from "./parts/EventName";
+import { AvelablePlatform } from "./parts/AvelablePlatform";
+import { Date } from "./parts/Date";
+import { StartTime } from "./parts/StartTime";
+import { EndTime } from "./parts/EndTIme";
+import { EventOwner } from "./parts/EventOwner";
+import { EventContent } from "./parts/EventContent";
+import { EventGenre } from "./parts/EventGenre";
+import { ParticipationConditions } from "./parts/ParticipationConditions";
+import { WayToParticipate } from "./parts/WayToParticipate";
+import { Note } from "./parts/Note";
+import { NoticeForOverseasUsers } from "./parts/NoticeForOverseasUsers";
 
 export const VrcEventCalenderUrlGenerator = () => {
   const [url, setUrl] = useState('');
-  
+
   const initialValues = {
     eventName: "エンジニア作業飲み集会",
     avelablePlatform: { pc: true, quest: true },
@@ -226,8 +226,8 @@ export const VrcEventCalenderUrlGenerator = () => {
           <button type="submit">Submit</button>
         </MuiFormGroup>
       </form>
-      {url !== '' && 
-      <a href={url}>カレンダーURL</a>
+      {url !== '' &&
+        <a href={url}>カレンダーURL</a>
       }
     </>
   );
