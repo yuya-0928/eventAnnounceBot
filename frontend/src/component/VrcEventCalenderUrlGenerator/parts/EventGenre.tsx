@@ -4,29 +4,7 @@ import {
   FormControlLabel as MuiFormControlLabel,
   Checkbox as MuiCheckbox,
 } from "@material-ui/core";
-
-type EventGenreType = {
-  // アバター試着会
-  avaterFitting: boolean;
-  // 改変アバター交流会
-  modifiedAvaterExchange: boolean;
-  // その他交流会
-  otherNetworkingEvent: boolean;
-  // VR飲み会
-  vrDrinkingParty: boolean;
-  // 店舗系イベント
-  storeEvent: boolean;
-  // 音楽系イベント
-  musicEvent: boolean;
-  // 学術系イベント
-  academicEvent: boolean;
-  // ロールプレイ
-  rolePlay: boolean;
-  // 初心者向けイベント
-  eventForBeginners: boolean;
-  // 定期イベント
-  regularEvent: boolean;
-};
+import { EventGenreType } from "../../../types/VrcEventCalenderType";
 
 type Props = {
   initialValue: EventGenreType;
@@ -40,8 +18,8 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
       <MuiFormControlLabel
         control={
           <MuiCheckbox
-            checked={initialValue.avaterFitting}
-            onChange={(e) => setEventGenre("avaterFitting", e.target.checked)}
+            checked={initialValue.avatarFittingEvent}
+            onChange={(e) => setEventGenre("avatarFitting", e.target.checked)}
           />
         }
         label={"アバター試着会"}
@@ -49,9 +27,9 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
       <MuiFormControlLabel
         control={
           <MuiCheckbox
-            checked={initialValue.modifiedAvaterExchange}
+            checked={initialValue.modifiedAvatarExchangeEvent}
             onChange={(e) =>
-              setEventGenre("modifiedAvaterExchange", e.target.checked)
+              setEventGenre("modifiedAvatarExchange", e.target.checked)
             }
           />
         }
@@ -71,7 +49,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
       <MuiFormControlLabel
         control={
           <MuiCheckbox
-            checked={initialValue.vrDrinkingParty}
+            checked={initialValue.vrDrinkingEvent}
             onChange={(e) => setEventGenre("vrDrinkingParty", e.target.checked)}
           />
         }
@@ -107,7 +85,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
       <MuiFormControlLabel
         control={
           <MuiCheckbox
-            checked={initialValue.rolePlay}
+            checked={initialValue.rolePlayEvent}
             onChange={(e) => setEventGenre("rolePlay", e.target.checked)}
           />
         }
@@ -116,7 +94,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
       <MuiFormControlLabel
         control={
           <MuiCheckbox
-            checked={initialValue.eventForBeginners}
+            checked={initialValue.forBeginnersEvent}
             onChange={(e) =>
               setEventGenre("eventForBeginners", e.target.checked)
             }

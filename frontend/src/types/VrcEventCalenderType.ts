@@ -1,12 +1,12 @@
 import { Dayjs } from "dayjs";
 
-export type AvailablePlatform = "PC" | "Quest" | "PC&Quest";
+export type AvailablePlatformType = "PC" | "Quest" | "PC&Quest";
 
-export type EventGenre = {
+export type EventGenreType = {
   // アバター試着会
   avatarFittingEvent: boolean;
   // 改変アバター交流会
-  modifiedAvaterExchangeEvent: boolean;
+  modifiedAvatarExchangeEvent: boolean;
   // その他交流会
   otherNetworkingEvent: boolean;
   // VR飲み会
@@ -27,13 +27,13 @@ export type EventGenre = {
 
 export type VrcEventCalenderType = {
   eventName: string;
-  availablePlatform: AvailablePlatform;
+  availablePlatform: AvailablePlatformType;
   date: Dayjs;
   startTime: string;
   endTime: string;
   eventOwner: string;
   eventContent: string;
-  eventGenre: EventGenre;
+  eventGenre: EventGenreType;
   participationConditions: string;
   wayToParticipate: string;
   note: string;
