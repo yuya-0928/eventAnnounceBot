@@ -62,6 +62,8 @@ const replaceEventGenreForUrl = (eventGenres: EventGenreType) =>
             return "初心者向けイベント";
           case "regularEvent":
             return "定期イベント";
+          default:
+            return "";
         }
       }
     });
