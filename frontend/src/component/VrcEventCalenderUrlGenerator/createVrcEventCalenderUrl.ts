@@ -22,8 +22,9 @@ const googleFormEntryIds = {
   note: "586354013",
 };
 
-// TODO: 名前を変える。AvailablePlatformを受け取って、文字列を返す関数なのでreplaceAvailablePlatformForUrl
-const getAvailablePlatform = (availablePlatform: AvailablePlatformType) => {
+const replaceAvailablePlatformForUrl = (
+  availablePlatform: AvailablePlatformType
+) => {
   switch (availablePlatform) {
     case "PC&Quest":
       return "PC/Quest両対応（Quest対応）";
@@ -37,7 +38,7 @@ const getAvailablePlatform = (availablePlatform: AvailablePlatformType) => {
   }
 };
 
-const getEventGenreArray = (eventGenres: EventGenreType) =>
+const replaceEventGenreForUrl = (eventGenres: EventGenreType) =>
   Object.entries(eventGenres)
     .filter((genre) => genre[1] === true)
     .map((genre) => {
@@ -84,9 +85,9 @@ export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
   const eventCalenderUrl = [
     originalUrl,
     `&entry.${googleFormEntryIds.eventName}=${values.eventName}`,
-    `&entry.${googleFormEntryIds.availablePlatform}=${getAvailablePlatform(
-      values.availablePlatform
-    )}`,
+    `&entry.${
+      googleFormEntryIds.availablePlatform
+    }=${replaceAvailablePlatformForUrl(values.availablePlatform)}`,
     `&entry.${googleFormEntryIds.date}=${dayjs(values.date).format(
       "YYYY-MM-DD"
     )}`,
@@ -99,7 +100,7 @@ export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
     `&entry.${googleFormEntryIds.note}=${values.note}`,
   ];
   const eventGenreUrl: string[] = [];
-  getEventGenreArray(values.eventGenre).forEach((genre) =>
+  replaceEventGenreForUrl(values.eventGenre).forEach((genre) =>
     eventCalenderUrl.push(`&entry.${googleFormEntryIds.eventGenre}=${genre}`)
   );
   eventCalenderUrl.push(eventGenreUrl.join(""));
