@@ -15,7 +15,7 @@ export const EventContent = ({ eventContent, onChange }: Props) => {
     <MuiFormControl>
       <MuiFormLabel>イベント内容</MuiFormLabel>
       <MuiTextField
-        name="evnetContent"
+        name="eventContent"
         variant="outlined"
         onChange={onChange()}
         value={eventContent}
