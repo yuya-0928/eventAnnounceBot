@@ -44,7 +44,7 @@ const replaceEventGenreForUrl = (eventGenres: EventGenreType) =>
         switch (genre[0]) {
           case "avatarFittingEvent":
             return "アバター試着会";
-          case "modifiedAvaterExchangeEvent":
+          case "modifiedAvatarExchangeEvent":
             return "改変アバター交流会";
           case "otherNetworkingEvent":
             return "その他交流会";
