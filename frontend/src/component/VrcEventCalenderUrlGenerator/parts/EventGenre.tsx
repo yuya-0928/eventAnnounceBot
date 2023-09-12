@@ -19,7 +19,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
         control={
           <MuiCheckbox
             checked={initialValue.avatarFittingEvent}
-            onChange={(e) => setEventGenre("avatarFitting", e.target.checked)}
+            onChange={(e) => setEventGenre("avatarFittingEvent", e.target.checked)}
           />
         }
         label={"アバター試着会"}
@@ -29,7 +29,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
           <MuiCheckbox
             checked={initialValue.modifiedAvatarExchangeEvent}
             onChange={(e) =>
-              setEventGenre("modifiedAvatarExchange", e.target.checked)
+              setEventGenre("modifiedAvatarExchangeEvent", e.target.checked)
             }
           />
         }
@@ -50,7 +50,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
         control={
           <MuiCheckbox
             checked={initialValue.vrDrinkingEvent}
-            onChange={(e) => setEventGenre("vrDrinkingParty", e.target.checked)}
+            onChange={(e) => setEventGenre("vrDrinkingEvent", e.target.checked)}
           />
         }
         label={"VR飲み会"}
@@ -86,7 +86,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
         control={
           <MuiCheckbox
             checked={initialValue.rolePlayEvent}
-            onChange={(e) => setEventGenre("rolePlay", e.target.checked)}
+            onChange={(e) => setEventGenre("rolePlayEvent", e.target.checked)}
           />
         }
         label={"ロールプレイ"}
@@ -96,7 +96,7 @@ export const EventGenre = ({ initialValue, setEventGenre }: Props) => {
           <MuiCheckbox
             checked={initialValue.forBeginnersEvent}
             onChange={(e) =>
-              setEventGenre("eventForBeginners", e.target.checked)
+              setEventGenre("forBeginnersEvent", e.target.checked)
             }
           />
         }
