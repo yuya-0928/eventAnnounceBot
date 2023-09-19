@@ -23,7 +23,7 @@ const googleFormEntryIds = {
   noticeForOverseasUsers: "1607289186",
 };
 
-const replaceAvailablePlatformForUrl = (
+const convertAvailablePlatformForUrl = (
   availablePlatform: AvailablePlatformType
 ) => {
   switch (availablePlatform) {
@@ -36,7 +36,7 @@ const replaceAvailablePlatformForUrl = (
   }
 };
 
-const replaceEventGenreForUrl = (eventGenres: EventGenreType) =>
+const convertEventGenreForUrl = (eventGenres: EventGenreType) =>
   Object.entries(eventGenres)
     .filter((genre) => genre[1] === true)
     .map((genre) => {
@@ -74,7 +74,7 @@ export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
     `&entry.${googleFormEntryIds.eventName}=${values.eventName}`,
     `&entry.${
       googleFormEntryIds.availablePlatform
-    }=${replaceAvailablePlatformForUrl(values.availablePlatform)}`,
+    }=${convertAvailablePlatformForUrl(values.availablePlatform)}`,
     `&entry.${googleFormEntryIds.date}=${dayjs(values.date).format(
       "YYYY-MM-DD"
     )}`,
@@ -87,7 +87,7 @@ export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
     `&entry.${googleFormEntryIds.note}=${values.note}`,
   ];
   const eventGenreUrl: string[] = [];
-  replaceEventGenreForUrl(values.eventGenre).forEach((genre) =>
+  convertEventGenreForUrl(values.eventGenre).forEach((genre) =>
     eventCalenderUrl.push(`&entry.${googleFormEntryIds.eventGenre}=${genre}`)
   );
   eventCalenderUrl.push(eventGenreUrl.join(""));
