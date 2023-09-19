@@ -104,23 +104,19 @@ export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
       values.wayToParticipate
     ),
     createEntryUrlParams(googleFormEntryIds.note, values.note),
+    ...(values.noticeForOverseasUsers
+      ? [
+          createEntryUrlParams(
+            googleFormEntryIds.noticeForOverseasUsers,
+            "希望する"
+          ),
+        ]
+      : []),
   ].join("");
   const eventGenreUrlParams = createEventGenreUrlParams(values.eventGenre);
-  const noticeForOverseasUsersUrlParams = createEntryUrlParams(
-    googleFormEntryIds.noticeForOverseasUsers,
-    "希望する"
-  );
 
-  let eventCalenderUrl;
-  if (values.noticeForOverseasUsers) {
-    eventCalenderUrl =
-      originalUrl +
-      eventCalenderParams +
-      eventGenreUrlParams +
-      noticeForOverseasUsersUrlParams;
-  } else {
-    eventCalenderUrl = originalUrl + eventCalenderParams + eventGenreUrlParams;
-  }
+  const eventCalenderUrl =
+    originalUrl + eventCalenderParams + eventGenreUrlParams;
 
   return eventCalenderUrl;
 };
