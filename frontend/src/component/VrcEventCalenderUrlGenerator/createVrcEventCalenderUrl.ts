@@ -68,33 +68,59 @@ const convertEventGenreForUrl = (eventGenres: EventGenreType) =>
       }
     });
 
-export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
-  const eventCalenderUrl = [
-    originalUrl,
-    `&entry.${googleFormEntryIds.eventName}=${values.eventName}`,
-    `&entry.${
-      googleFormEntryIds.availablePlatform
-    }=${convertAvailablePlatformForUrl(values.availablePlatform)}`,
-    `&entry.${googleFormEntryIds.date}=${dayjs(values.date).format(
-      "YYYY-MM-DD"
-    )}`,
-    `&entry.${googleFormEntryIds.startTime}=${values.startTime}`,
-    `&entry.${googleFormEntryIds.endTime}=${values.endTime}`,
-    `&entry.${googleFormEntryIds.eventOwner}=${values.eventOwner}`,
-    `&entry.${googleFormEntryIds.eventContent}=${values.eventContent}`,
-    `&entry.${googleFormEntryIds.participationConditions}=${values.participationConditions}`,
-    `&entry.${googleFormEntryIds.wayToParticipate}=${values.wayToParticipate}`,
-    `&entry.${googleFormEntryIds.note}=${values.note}`,
-  ];
-  const eventGenreUrl: string[] = [];
-  convertEventGenreForUrl(values.eventGenre).forEach((genre) =>
-    eventCalenderUrl.push(`&entry.${googleFormEntryIds.eventGenre}=${genre}`)
+const createEntryUrlParams = (entryId: string, value: string) => {
+  return `&entry.${entryId}=${value}`;
+};
+
+const createEventGenreUrlParams = (eventGenre: EventGenreType) => {
+  const urlParams: string[] = [];
+  convertEventGenreForUrl(eventGenre).forEach((genre) =>
+    urlParams.push(createEntryUrlParams(googleFormEntryIds.eventGenre, genre))
   );
-  eventCalenderUrl.push(eventGenreUrl.join(""));
-  if (values.noticeForOverseasUsers)
-    eventCalenderUrl.push(
-      `&entry.${googleFormEntryIds.noticeForOverseasUsers}=希望する`
-    );
-  console.dir(eventCalenderUrl.join(""));
-  return eventCalenderUrl.join("");
+  return urlParams.join("");
+};
+
+export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
+  const eventCalenderParams = [
+    createEntryUrlParams(googleFormEntryIds.eventName, values.eventName),
+    createEntryUrlParams(
+      googleFormEntryIds.availablePlatform,
+      convertAvailablePlatformForUrl(values.availablePlatform)
+    ),
+    createEntryUrlParams(
+      googleFormEntryIds.date,
+      dayjs(values.date).format("YYYY-MM-DD")
+    ),
+    createEntryUrlParams(googleFormEntryIds.startTime, values.startTime),
+    createEntryUrlParams(googleFormEntryIds.endTime, values.endTime),
+    createEntryUrlParams(googleFormEntryIds.eventOwner, values.eventOwner),
+    createEntryUrlParams(googleFormEntryIds.eventContent, values.eventContent),
+    createEntryUrlParams(
+      googleFormEntryIds.participationConditions,
+      values.participationConditions
+    ),
+    createEntryUrlParams(
+      googleFormEntryIds.wayToParticipate,
+      values.wayToParticipate
+    ),
+    createEntryUrlParams(googleFormEntryIds.note, values.note),
+  ].join("");
+  const eventGenreUrlParams = createEventGenreUrlParams(values.eventGenre);
+  const noticeForOverseasUsersUrlParams = createEntryUrlParams(
+    googleFormEntryIds.noticeForOverseasUsers,
+    "希望する"
+  );
+
+  let eventCalenderUrl;
+  if (values.noticeForOverseasUsers) {
+    eventCalenderUrl =
+      originalUrl +
+      eventCalenderParams +
+      eventGenreUrlParams +
+      noticeForOverseasUsersUrlParams;
+  } else {
+    eventCalenderUrl = originalUrl + eventCalenderParams + eventGenreUrlParams;
+  }
+
+  return eventCalenderUrl;
 };
