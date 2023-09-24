@@ -1,14 +1,21 @@
-import dayjs from "dayjs";
 import {
   AvailablePlatformType,
-  EventGenreType,
   VrcEventCalenderType,
 } from "../../types/VrcEventCalenderType";
 
-const originalUrl =
-  "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform?usp=pp_url";
+const originalUrl = new URL(
+  "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform"
+);
 
-const googleFormEntryIds = {
+type GoogleFormEntry = {
+  [key: string]: string;
+};
+
+type EventGenreName = {
+  [key: string]: string;
+};
+
+const googleFormEntryIds: GoogleFormEntry = {
   eventName: "426573786",
   availablePlatform: "1261006949",
   date: "450203369",
@@ -21,6 +28,19 @@ const googleFormEntryIds = {
   wayToParticipate: "1285455202",
   note: "586354013",
   noticeForOverseasUsers: "1607289186",
+};
+
+const eventGenreNames: EventGenreName = {
+  avatarFittingEvent: "アバター試着会",
+  modifiedAvatarExchangeEvent: "改変アバター交流会",
+  otherNetworkingEvent: "その他交流会",
+  vrDrinkingEvent: "VR飲み会",
+  storeEvent: "店舗系イベント",
+  musicEvent: "音楽系イベント",
+  academicEvent: "学術系イベント",
+  rolePlayEvent: "ロールプレイ",
+  forBeginnersEvent: "初心者向けイベント",
+  regularEvent: "定期イベント",
 };
 
 const convertAvailablePlatformForUrl = (
@@ -36,87 +56,59 @@ const convertAvailablePlatformForUrl = (
   }
 };
 
-const convertEventGenreForUrl = (eventGenres: EventGenreType) =>
-  Object.entries(eventGenres)
-    .filter((genre) => genre[1] === true)
-    .map((genre) => {
-      {
-        switch (genre[0]) {
-          case "avatarFittingEvent":
-            return "アバター試着会";
-          case "modifiedAvatarExchangeEvent":
-            return "改変アバター交流会";
-          case "otherNetworkingEvent":
-            return "その他交流会";
-          case "vrDrinkingEvent":
-            return "VR飲み会";
-          case "storeEvent":
-            return "店舗系イベント";
-          case "musicEvent":
-            return "音楽系イベント";
-          case "academicEvent":
-            return "学術系イベント";
-          case "rolePlayEvent":
-            return "ロールプレイ";
-          case "forBeginnersEvent":
-            return "初心者向けイベント";
-          case "regularEvent":
-            return "定期イベント";
-          default:
-            return "";
+const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
+  const params = new URLSearchParams();
+  params.append("usp", "pp_url"); // google formにパラメーターで値を渡すために付与する必要がある
+
+  Object.entries(eventCalenderValues).map((entry) => {
+    const key = entry[0];
+    const value = entry[1];
+
+    switch (typeof value) {
+      case "boolean": {
+        if (key === "noticeForOverseasUsers" && value === true) {
+          params.append(`entry.${googleFormEntryIds[key]}`, "希望する");
         }
+        break;
       }
-    });
 
-const createEntryUrlParams = (entryId: string, value: string) => {
-  return `&entry.${entryId}=${value}`;
-};
+      case "object": {
+        if (key === "eventGenre") {
+          Object.entries(value).map((entry) => {
+            const key = entry[0];
+            const value = entry[1];
+            if (value) {
+              params.append(
+                `entry.${googleFormEntryIds["eventGenre"]}`,
+                eventGenreNames[key]
+              );
+            }
+          });
+        }
+        break;
+      }
 
-const createEventGenreUrlParams = (eventGenre: EventGenreType) => {
-  const urlParams: string[] = [];
-  convertEventGenreForUrl(eventGenre).forEach((genre) =>
-    urlParams.push(createEntryUrlParams(googleFormEntryIds.eventGenre, genre))
-  );
-  return urlParams.join("");
+      default: {
+        if (key === "availablePlatform") {
+          params.append(
+            `entry.${googleFormEntryIds[key]}`,
+            convertAvailablePlatformForUrl(value as AvailablePlatformType)
+          );
+          break;
+        }
+
+        params.append(`entry.${googleFormEntryIds[key]}`, value);
+        break;
+      }
+    }
+  });
+
+  return params;
 };
 
 export const createVrcEventCalenderUrl = (values: VrcEventCalenderType) => {
-  const eventCalenderParams = [
-    createEntryUrlParams(googleFormEntryIds.eventName, values.eventName),
-    createEntryUrlParams(
-      googleFormEntryIds.availablePlatform,
-      convertAvailablePlatformForUrl(values.availablePlatform)
-    ),
-    createEntryUrlParams(
-      googleFormEntryIds.date,
-      dayjs(values.date).format("YYYY-MM-DD")
-    ),
-    createEntryUrlParams(googleFormEntryIds.startTime, values.startTime),
-    createEntryUrlParams(googleFormEntryIds.endTime, values.endTime),
-    createEntryUrlParams(googleFormEntryIds.eventOwner, values.eventOwner),
-    createEntryUrlParams(googleFormEntryIds.eventContent, values.eventContent),
-    createEntryUrlParams(
-      googleFormEntryIds.participationConditions,
-      values.participationConditions
-    ),
-    createEntryUrlParams(
-      googleFormEntryIds.wayToParticipate,
-      values.wayToParticipate
-    ),
-    createEntryUrlParams(googleFormEntryIds.note, values.note),
-    ...(values.noticeForOverseasUsers
-      ? [
-          createEntryUrlParams(
-            googleFormEntryIds.noticeForOverseasUsers,
-            "希望する"
-          ),
-        ]
-      : []),
-  ].join("");
-  const eventGenreUrlParams = createEventGenreUrlParams(values.eventGenre);
+  const params = createUrlParams(values).toString();
+  const eventCalenderUrl = new URL(`${originalUrl.href}?${params}`);
 
-  const eventCalenderUrl =
-    originalUrl + eventCalenderParams + eventGenreUrlParams;
-
-  return eventCalenderUrl;
+  return eventCalenderUrl.href;
 };
