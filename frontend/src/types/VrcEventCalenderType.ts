@@ -1,5 +1,3 @@
-import { Dayjs } from "dayjs";
-
 export type AvailablePlatformType = "PC" | "Quest" | "PC&Quest";
 
 export type EventGenreType = {
@@ -28,7 +26,7 @@ export type EventGenreType = {
 export type VrcEventCalenderType = {
   eventName: string;
   availablePlatform: AvailablePlatformType;
-  date: Dayjs;
+  date: string;
   startTime: string;
   endTime: string;
   eventOwner: string;

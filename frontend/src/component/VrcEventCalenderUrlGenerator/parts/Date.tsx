@@ -7,7 +7,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 
 type Props = {
-  date: Dayjs;
+  date: string;
   onChange: (newValue: Dayjs | null) => void;
 };
 
