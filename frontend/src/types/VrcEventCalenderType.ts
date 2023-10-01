@@ -1,4 +1,7 @@
-export type AvailablePlatformType = "PC" | "Quest" | "PC&Quest";
+export type AvailablePlatformType =
+  | "PCオンリー"
+  | "Quest オンリー"
+  | "PC/Quest両対応（Quest対応）";
 
 export type EventGenreType = {
   // アバター試着会
