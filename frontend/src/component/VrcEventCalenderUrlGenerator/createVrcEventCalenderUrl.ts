@@ -1,7 +1,4 @@
-import {
-  AvailablePlatformType,
-  VrcEventCalenderType,
-} from "../../types/VrcEventCalenderType";
+import { VrcEventCalenderType } from "../../types/VrcEventCalenderType";
 
 const originalUrl = new URL(
   "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform"
@@ -43,9 +40,12 @@ const eventGenreNames: EventGenreName = {
   regularEvent: "定期イベント",
 };
 
-const convertAvailablePlatformForUrl = (
-  availablePlatform: AvailablePlatformType
+const createUrlParamsBooleanForm = (
+  params: URLSearchParams,
+  key: string,
+  value: string
 ) => {
+  return params.append(`entry.${googleFormEntryIds[key]}`, value);
 };
 
 const createUrlParamsStringForm = (
@@ -67,7 +67,7 @@ const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
     switch (typeof value) {
       case "boolean": {
         if (key === "noticeForOverseasUsers" && value === true) {
-          params.append(`entry.${googleFormEntryIds[key]}`, "希望する");
+          createUrlParamsBooleanForm(params, key, "希望する");
         }
         break;
       }
