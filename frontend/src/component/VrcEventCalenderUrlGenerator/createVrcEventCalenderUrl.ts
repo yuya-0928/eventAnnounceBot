@@ -43,7 +43,20 @@ const eventGenreNames: EventGenreName = {
   regularEvent: "定期イベント",
 };
 
-const createUrlParamsBooleanForm = (
+const appendParamsBooleanForm = (
+  params: URLSearchParams,
+  key: string,
+  value: boolean
+) => {
+  switch (key) {
+    case "noticeForOverseasUsers": {
+      if (value) params.append(`entry.${googleFormEntryIds[key]}`, "希望する");
+      break;
+    }
+  }
+};
+
+const appendParamsStringForm = (
   params: URLSearchParams,
   key: string,
   value: string
@@ -51,15 +64,7 @@ const createUrlParamsBooleanForm = (
   return params.append(`entry.${googleFormEntryIds[key]}`, value);
 };
 
-const createUrlParamsStringForm = (
-  params: URLSearchParams,
-  key: string,
-  value: string
-) => {
-  return params.append(`entry.${googleFormEntryIds[key]}`, value);
-};
-
-const createUrlParamsObjectForm = (
+const appendParamsObjectForm = (
   params: URLSearchParams,
   key: string,
   object: EventGenreType
@@ -86,21 +91,15 @@ const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
 
     switch (typeof value) {
       case "boolean": {
-        if (key === "noticeForOverseasUsers" && value === true) {
-          createUrlParamsBooleanForm(params, key, "希望する");
-        }
+        appendParamsBooleanForm(params, key, value);
         break;
       }
-
       case "object": {
-        if (key === "eventGenre") {
-          createUrlParamsObjectForm(params, key, value);
-        }
+        appendParamsObjectForm(params, key, value);
         break;
       }
-
       default: {
-        createUrlParamsStringForm(params, key, value);
+        appendParamsStringForm(params, key, value);
         break;
       }
     }
