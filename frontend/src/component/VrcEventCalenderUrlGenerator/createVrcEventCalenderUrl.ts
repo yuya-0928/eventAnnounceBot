@@ -1,4 +1,7 @@
-import { VrcEventCalenderType } from "../../types/VrcEventCalenderType";
+import {
+  EventGenreType,
+  VrcEventCalenderType,
+} from "../../types/VrcEventCalenderType";
 
 const originalUrl = new URL(
   "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform"
@@ -56,6 +59,23 @@ const createUrlParamsStringForm = (
   return params.append(`entry.${googleFormEntryIds[key]}`, value);
 };
 
+const createUrlParamsObjectForm = (
+  params: URLSearchParams,
+  key: string,
+  object: EventGenreType
+) => {
+  Object.entries(object).map((entry) => {
+    const eventGenreNameKey = entry[0];
+    const value = entry[1];
+    if (value) {
+      params.append(
+        `entry.${googleFormEntryIds[key]}`,
+        eventGenreNames[eventGenreNameKey]
+      );
+    }
+  });
+};
+
 const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
   const params = new URLSearchParams();
   params.append("usp", "pp_url"); // google formにパラメーターで値を渡すために付与する必要がある
@@ -74,16 +94,7 @@ const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
 
       case "object": {
         if (key === "eventGenre") {
-          Object.entries(value).map((entry) => {
-            const key = entry[0];
-            const value = entry[1];
-            if (value) {
-              params.append(
-                `entry.${googleFormEntryIds["eventGenre"]}`,
-                eventGenreNames[key]
-              );
-            }
-          });
+          createUrlParamsObjectForm(params, key, value);
         }
         break;
       }
