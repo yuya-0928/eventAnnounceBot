@@ -43,7 +43,7 @@ const eventGenreNames: EventGenreName = {
   regularEvent: "定期イベント",
 };
 
-const appendParamsBooleanForm = (
+export const appendParamsBooleanForm = (
   params: URLSearchParams,
   key: string,
   value: boolean
@@ -56,7 +56,7 @@ const appendParamsBooleanForm = (
   }
 };
 
-const appendParamsStringForm = (
+export const appendParamsStringForm = (
   params: URLSearchParams,
   key: string,
   value: string
@@ -64,7 +64,7 @@ const appendParamsStringForm = (
   return params.append(`entry.${googleFormEntryIds[key]}`, value);
 };
 
-const appendParamsObjectForm = (
+export const appendParamsObjectForm = (
   params: URLSearchParams,
   key: string,
   object: EventGenreType

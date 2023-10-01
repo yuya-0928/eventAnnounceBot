@@ -1,5 +1,10 @@
 import { VrcEventCalenderType } from "../../types/VrcEventCalenderType";
-import { createVrcEventCalenderUrl } from "./createVrcEventCalenderUrl";
+import {
+  appendParamsBooleanForm,
+  appendParamsObjectForm,
+  appendParamsStringForm,
+  createVrcEventCalenderUrl,
+} from "./createVrcEventCalenderUrl";
 
 const testData: VrcEventCalenderType = {
   eventName: "イベント名",
@@ -31,5 +36,42 @@ test("testDataで渡した値が正しいURLに変換される", () => {
   const result = createVrcEventCalenderUrl(testData);
   expect(result).toBe(
     "https://docs.google.com/forms/d/e/1FAIpQLSevo0ax6ALIzllRCT7up-3KZkohD3VfG28rcOy8XMqDwRWevQ/viewform?usp=pp_url&entry.426573786=%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%90%8D&entry.1261006949=PC%2FQuest%E4%B8%A1%E5%AF%BE%E5%BF%9C%EF%BC%88Quest%E5%AF%BE%E5%BF%9C%EF%BC%89&entry.450203369=2021-10-10&entry.1010494053=22%3A00&entry.203043324=23%3A30&entry.1540217995=%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E4%B8%BB%E5%82%AC%E8%80%85&entry.701384676=%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%86%85%E5%AE%B9%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%86%85%E5%AE%B9%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%86%85%E5%AE%B9%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%86%85%E5%AE%B9&entry.1606730788=%E3%81%9D%E3%81%AE%E4%BB%96%E4%BA%A4%E6%B5%81%E4%BC%9A&entry.1606730788=VR%E9%A3%B2%E3%81%BF%E4%BC%9A&entry.1606730788=%E5%AE%9A%E6%9C%9F%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88&entry.2064647146=%E5%8F%82%E5%8A%A0%E6%9D%A1%E4%BB%B6%E5%8F%82%E5%8A%A0%E6%9D%A1%E4%BB%B6%E5%8F%82%E5%8A%A0%E6%9D%A1%E4%BB%B6%E5%8F%82%E5%8A%A0%E6%9D%A1%E4%BB%B6&entry.1285455202=%E5%8F%82%E5%8A%A0%E6%96%B9%E6%B3%95%E5%8F%82%E5%8A%A0%E6%96%B9%E6%B3%95%E5%8F%82%E5%8A%A0%E6%96%B9%E6%B3%95%E5%8F%82%E5%8A%A0%E6%96%B9%E6%B3%95&entry.586354013=%E5%82%99%E8%80%83%E5%82%99%E8%80%83%E5%82%99%E8%80%83%E5%82%99%E8%80%83&entry.1607289186=%E5%B8%8C%E6%9C%9B%E3%81%99%E3%82%8B"
+  );
+});
+
+test("appendParamsBooleanFormで正しいparamsが作成される", () => {
+  const params = new URLSearchParams();
+  appendParamsBooleanForm(params, "noticeForOverseasUsers", true);
+  const result = params.toString();
+  expect(result).toBe("entry.1607289186=%E5%B8%8C%E6%9C%9B%E3%81%99%E3%82%8B");
+});
+
+test("appendParamsObjectFormで正しいparamsが作成される", () => {
+  const params = new URLSearchParams();
+  const testEventGenreData = {
+    avatarFittingEvent: true,
+    modifiedAvatarExchangeEvent: false,
+    otherNetworkingEvent: true,
+    vrDrinkingEvent: false,
+    storeEvent: true,
+    musicEvent: false,
+    academicEvent: true,
+    rolePlayEvent: false,
+    forBeginnersEvent: true,
+    regularEvent: false,
+  };
+  appendParamsObjectForm(params, "eventGenre", testEventGenreData);
+  const result = params.toString();
+  expect(result).toBe(
+    "entry.1606730788=%E3%82%A2%E3%83%90%E3%82%BF%E3%83%BC%E8%A9%A6%E7%9D%80%E4%BC%9A&entry.1606730788=%E3%81%9D%E3%81%AE%E4%BB%96%E4%BA%A4%E6%B5%81%E4%BC%9A&entry.1606730788=%E5%BA%97%E8%88%97%E7%B3%BB%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88&entry.1606730788=%E5%AD%A6%E8%A1%93%E7%B3%BB%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88&entry.1606730788=%E5%88%9D%E5%BF%83%E8%80%85%E5%90%91%E3%81%91%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88"
+  );
+});
+
+test("appendParamsStringFormで正しいparamsが作成される", () => {
+  const params = new URLSearchParams();
+  appendParamsStringForm(params, "eventName", "イベント名");
+  const result = params.toString();
+  expect(result).toBe(
+    "entry.426573786=%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%90%8D"
   );
 });
