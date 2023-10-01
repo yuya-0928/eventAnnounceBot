@@ -22,7 +22,7 @@ export const VrcEventCalenderUrlGenerator = () => {
 
   const initialValues: VrcEventCalenderType = {
     eventName: "エンジニア作業飲み集会",
-    availablePlatform: "PC&Quest",
+    availablePlatform: "PC/Quest両対応（Quest対応）",
     date: dayjs().format("YYYY-MM-DD"),
     startTime: "22:00",
     endTime: "23:30",
