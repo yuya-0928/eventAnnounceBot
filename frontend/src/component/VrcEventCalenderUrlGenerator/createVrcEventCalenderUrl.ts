@@ -46,14 +46,14 @@ const eventGenreNames: EventGenreName = {
 const convertAvailablePlatformForUrl = (
   availablePlatform: AvailablePlatformType
 ) => {
-  switch (availablePlatform) {
-    case "PC&Quest":
-      return "PC/Quest両対応（Quest対応）";
-    case "PC":
-      return "PC対応";
-    case "Quest":
-      return "Quest対応";
-  }
+};
+
+const createUrlParamsStringForm = (
+  params: URLSearchParams,
+  key: string,
+  value: string
+) => {
+  return params.append(`entry.${googleFormEntryIds[key]}`, value);
 };
 
 const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
@@ -89,15 +89,7 @@ const createUrlParams = (eventCalenderValues: VrcEventCalenderType) => {
       }
 
       default: {
-        if (key === "availablePlatform") {
-          params.append(
-            `entry.${googleFormEntryIds[key]}`,
-            convertAvailablePlatformForUrl(value as AvailablePlatformType)
-          );
-          break;
-        }
-
-        params.append(`entry.${googleFormEntryIds[key]}`, value);
+        createUrlParamsStringForm(params, key, value);
         break;
       }
     }
