@@ -3,7 +3,7 @@ import { createVrcEventCalenderUrl } from "./createVrcEventCalenderUrl";
 
 const mock: VrcEventCalenderType = {
   eventName: "イベント名",
-  availablePlatform: "PC&Quest",
+  availablePlatform: "PC/Quest両対応（Quest対応）",
   date: "2021-10-10",
   startTime: "22:00",
   endTime: "23:30",
